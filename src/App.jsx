@@ -13,11 +13,13 @@ import NFT from "./screens/NFT";
 import Rewards from "./screens/Rewards";
 import { socket } from "./utils/socket";
 import EmailLogin from "./components/EmailLogin";
+import ScoreCard from "./components/ScoreCard";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isStartGame, setIsStartGame] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isScoreCard, setIsScoreCard] = useState(true);
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const [dataFromApi, setDataFromApi] = useState([]);
 
@@ -74,6 +76,7 @@ function App() {
 
   return (
     <>
+      {isScoreCard ? <ScoreCard onClose={setIsScoreCard} /> : null}
       {isEmailLogin ? <EmailLogin onClose={setIsEmailLogin} /> : null}
       {isStartGame ? (
         <StartGame setIsStartGame={setIsStartGame} email={user?.email} />
