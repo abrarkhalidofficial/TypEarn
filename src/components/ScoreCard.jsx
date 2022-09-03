@@ -1,10 +1,19 @@
 import React from "react";
 import scorecardtop from "../assets/scorecardtop.png";
+import { useEffect } from "react";
 
 export default function ScoreCard({ onClose, FirstPosition }) {
+  const [isChecked, setIschecked] = React.useState(false);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
   return (
-    <div className="scorecard__reverse">
-      <form className="scorecard__reverse__form">
+    <div className="popup__reverse">
+      <form className="popup__reverse__form">
         <div className="scorecard__reverse__form__img">
           <img src={scorecardtop} alt="" />
         </div>
@@ -16,14 +25,26 @@ export default function ScoreCard({ onClose, FirstPosition }) {
               Congratulation
             </div>
           )}
-          <div className="scorecard__reverse__form__content__header">
-            <div className="scorecard__reverse__form__content__heading">
-              <span>2</span>nd
+
+          {FirstPosition ? (
+            <div className="scorecard__reverse__form__content__header">
+              <div className="scorecard__reverse__form__content__heading">
+                <span>2</span>nd
+              </div>
+              <div className="scorecard__reverse__form__content__sub__heading">
+                Position
+              </div>
             </div>
-            <div className="scorecard__reverse__form__content__sub__heading">
-              Position
+          ) : (
+            <div className="scorecard__reverse__form__content__header">
+              <div className="scorecard__reverse__form__content__heading">
+                <span>1</span>st
+              </div>
+              <div className="scorecard__reverse__form__content__sub__heading">
+                Position
+              </div>
             </div>
-          </div>
+          )}
           {FirstPosition ? (
             <div className="scorecard__reverse__form__content__score__card">
               <div className="scorecard__reverse__form__content__score__card__heading">
