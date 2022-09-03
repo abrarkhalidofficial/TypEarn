@@ -878,8 +878,8 @@ body {
 }
 .scorecard__reverse__form__img {
   position: absolute;
-  top: -25%;
-  right: -15%;
+  top: -55px;
+  right: -65px;
   width: 200px;
   height: 200px;
   display: flex;
@@ -891,7 +891,6 @@ body {
 }
 .scorecard__reverse__form__content {
   padding: 4em 2em;
-  padding-bottom: 2em;
   width: 100%;
   height: 100%;
   display: flex;
@@ -900,6 +899,11 @@ body {
 }
 .scorecard__reverse__form__content__header {
   margin-bottom: 2em;
+}
+.scorecard__reverse__form__content__header__congrates {
+  color: #202020;
+  font-size: 25px;
+  font-weight: 500;
 }
 .scorecard__reverse__form__content__heading {
   color: #202020;
@@ -925,15 +929,20 @@ body {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 1em;
+  padding: 0em 0.5em;
 }
-
+.scorecard__reverse__score__card__data__text {
+  font-size: 18px;
+}
+.scorecard__reverse__score__card__data__text span {
+  font-size: 18px;
+  font-weight: bold;
+}
 .scorecard__reverse__score__card__data {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5em;
-}
-.scorecard__reverse__score__card__data {
   font-size: 18px;
   padding: 0.5em;
   border-radius: 5px;

@@ -76,7 +76,9 @@ function App() {
 
   return (
     <>
-      {isScoreCard ? <ScoreCard onClose={setIsScoreCard} /> : null}
+      {isScoreCard ? (
+        <ScoreCard onClose={setIsScoreCard} FirstPosition={false} />
+      ) : null}
       {isEmailLogin ? <EmailLogin onClose={setIsEmailLogin} /> : null}
       {isStartGame ? (
         <StartGame setIsStartGame={setIsStartGame} email={user?.email} />
