@@ -7,11 +7,20 @@ import lightGreen from "../assets/game_assets/lightGreen.png";
 import { GamePlayerEntry } from "./GamePlayerEntry";
 import { socket } from "../utils/socket";
 
-export default function Game({ dataFromApi, user }) {
+export default function Game({
+  dataFromApi,
+  user,
+  setIsScoreCard,
+  setWinners,
+}) {
   const [typedString, setTypedString] = React.useState("");
-  console.log(dataFromApi);
+  console.log(dataFromApi.gameData.positions);
   const [gameStarted, setGameStarted] = React.useState(false);
   const [disable, setDisable] = React.useState(false);
+
+  useEffect(() => {
+    setWinners(dataFromApi.gameData.positions);
+  }, [dataFromApi.gameData.positions]);
 
   useEffect(() => {
     if (
@@ -41,7 +50,9 @@ export default function Game({ dataFromApi, user }) {
         if (list[dataFromApi?.currentWord] == value) {
           socket.send("6" + " " + user?.email);
           setTypedString("");
+          console.log("game ended");
           setDisable(true);
+          setIsScoreCard(true);
 
           // setTimeout(() => {
           //   navigate("/");

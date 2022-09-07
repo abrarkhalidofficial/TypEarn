@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.scss";
 import Footer from "./components/Footer";
 import { Header } from "./components/Header";
@@ -14,14 +14,17 @@ import Rewards from "./screens/Rewards";
 import { socket } from "./utils/socket";
 import EmailLogin from "./components/EmailLogin";
 import ScoreCard from "./components/ScoreCard";
+import { useEffect } from "react";
 
 function App() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isStartGame, setIsStartGame] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [isScoreCard, setIsScoreCard] = useState(true);
+  const [isScoreCard, setIsScoreCard] = useState(false);
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const [dataFromApi, setDataFromApi] = useState([]);
+  const [winners, setWinners] = useState([]);
 
   const [data, setdata] = useState({
     address: "",
@@ -74,10 +77,21 @@ function App() {
     setDataFromApi(js);
   });
 
+  useEffect(() => {
+    if (user === null) {
+      navigate("/");
+    }
+  }, [window.location.pathname]);
+
   return (
     <>
       {isScoreCard ? (
-        <ScoreCard onClose={setIsScoreCard} FirstPosition={true} />
+        <ScoreCard
+          onClose={setIsScoreCard}
+          FirstPosition={true}
+          winners={winners}
+          user={user}
+        />
       ) : null}
       {isEmailLogin ? <EmailLogin onClose={setIsEmailLogin} /> : null}
       {isStartGame ? (
@@ -141,6 +155,8 @@ function App() {
               setIsLogin={setIsLogin}
               dataFromApi={dataFromApi}
               setUser={setUser}
+              setIsScoreCard={setIsScoreCard}
+              setWinners={setWinners}
             />
           }
         />
