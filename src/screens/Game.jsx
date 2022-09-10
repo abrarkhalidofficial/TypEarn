@@ -14,7 +14,7 @@ export default function Game({
   setWinners,
 }) {
   const [typedString, setTypedString] = React.useState("");
-  console.log(dataFromApi.gameData.positions);
+  console.log(dataFromApi);
   const [gameStarted, setGameStarted] = React.useState(false);
   const [disable, setDisable] = React.useState(false);
 
@@ -26,13 +26,11 @@ export default function Game({
     if (
       dataFromApi.gameData.joined === parseInt(dataFromApi.gameData.noOfPlayers)
     ) {
-      console.log("game started");
       setGameStarted(true);
     } else {
       setInterval(() => {
         socket.send("5" + " " + user?.email);
       }, 1000);
-      console.log("game not started");
     }
   }, [dataFromApi.gameData.joined, dataFromApi.gameData.noOfPlayers]);
 
@@ -50,14 +48,8 @@ export default function Game({
         if (list[dataFromApi?.currentWord] == value) {
           socket.send("6" + " " + user?.email);
           setTypedString("");
-          console.log("game ended");
           setDisable(true);
           setIsScoreCard(true);
-
-          // setTimeout(() => {
-          //   navigate("/");
-          //   setUser(null);
-          // }, 1000);
         }
       }
     }

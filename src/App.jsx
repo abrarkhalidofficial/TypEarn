@@ -1,23 +1,21 @@
 import { useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import "./App.scss";
-import Footer from "./components/Footer";
+import { Route, Routes } from "react-router-dom";
+import { ethers } from "ethers";
+import { socket } from "./utils/socket";
 import { Header } from "./components/Header";
+import Footer from "./components/Footer";
 import Login from "./components/Login";
 import StartGame from "./components/StartGame";
 import Game from "./screens/Game";
 import Home from "./screens/Home";
 import Stake from "./screens/Stake";
-import { ethers } from "ethers";
 import NFT from "./screens/NFT";
 import Rewards from "./screens/Rewards";
-import { socket } from "./utils/socket";
 import EmailLogin from "./components/EmailLogin";
 import ScoreCard from "./components/ScoreCard";
-import { useEffect } from "react";
+import "./App.scss";
 
 function App() {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isStartGame, setIsStartGame] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -30,12 +28,9 @@ function App() {
     address: "",
     Balance: null,
   });
-  // Button handler button for handling a
-  // request event for metamask
+
   const btnhandler = () => {
-    // Asking if metamask is already present or not
     if (window.ethereum) {
-      // res[0] for fetching a first wallet
       window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then((res) => accountChangeHandler(res[0]));
@@ -44,31 +39,24 @@ function App() {
     }
   };
 
-  // getbalance function for getting a balance in
-  // a right format with help of ethers
   const getbalance = (address) => {
-    // Requesting balance method
     window.ethereum
       .request({
         method: "eth_getBalance",
         params: [address, "latest"],
       })
       .then((balance) => {
-        // Setting balance
         setdata({
           Balance: ethers.utils.formatEther(balance),
         });
       });
   };
 
-  // Function for getting handling all events
   const accountChangeHandler = (account) => {
-    // Setting an address data
     setdata({
       address: account,
     });
 
-    // Setting a balance
     getbalance(account);
   };
 
@@ -76,13 +64,6 @@ function App() {
     const js = JSON.parse(event.data);
     setDataFromApi(js);
   });
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/");
-    }
-  }, [window.location.pathname]);
-
   return (
     <>
       {isScoreCard ? (
