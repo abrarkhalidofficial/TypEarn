@@ -6,6 +6,7 @@ import lightYellow from "../assets/game_assets/lightYellow.png";
 import lightGreen from "../assets/game_assets/lightGreen.png";
 import { GamePlayerEntry } from "./GamePlayerEntry";
 import { socket } from "../utils/socket";
+import Timer from "../components/Timer";
 
 export default function Game({
   dataFromApi,
@@ -13,6 +14,13 @@ export default function Game({
   setIsScoreCard,
   setWinners,
 }) {
+  useEffect(() => {
+    if (!user) {
+      console.log("user not logged in");
+    }
+  }, []);
+
+  const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
   console.log(dataFromApi);
   const [gameStarted, setGameStarted] = React.useState(false);
@@ -21,18 +29,16 @@ export default function Game({
   useEffect(() => {
     setWinners(dataFromApi.gameData.positions);
   }, [dataFromApi.gameData.positions]);
-
+  console.log(dataFromApi?.gameData?.light === 2);
   useEffect(() => {
-    if (
-      dataFromApi.gameData.joined === parseInt(dataFromApi.gameData.noOfPlayers)
-    ) {
+    if (dataFromApi?.gameData?.light === 2) {
       setGameStarted(true);
     } else {
       setInterval(() => {
         socket.send("5" + " " + user?.email);
       }, 1000);
     }
-  }, [dataFromApi.gameData.joined, dataFromApi.gameData.noOfPlayers]);
+  }, [dataFromApi.gameData.light]);
 
   function showCurrentValue(event) {
     let list = dataFromApi?.gameData?.sentence?.split(" ");
@@ -56,6 +62,13 @@ export default function Game({
   }
   return (
     <>
+      {isTimerOpen ? (
+        <Timer
+          setIsTimerOpen={setIsTimerOpen}
+          value={dataFromApi.gameData.timer}
+          noJoin={dataFromApi?.gameData?.timer === undefined}
+        />
+      ) : null}
       <div
         className="home__banner"
         style={{
