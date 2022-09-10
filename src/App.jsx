@@ -9,7 +9,7 @@ import StartGame from "./components/StartGame";
 import Game from "./screens/Game";
 import Home from "./screens/Home";
 import Stake from "./screens/Stake";
-import NFT from "./screens/NFT";
+import Staked from "./screens/Staked";
 import Rewards from "./screens/Rewards";
 import EmailLogin from "./components/EmailLogin";
 import ScoreCard from "./components/ScoreCard";
@@ -108,9 +108,9 @@ function App() {
           }
         />
         <Route
-          path="/nft"
+          path="/staked"
           element={
-            <NFT
+            <Staked
               setIsStartGame={setIsStartGame}
               user={user}
               setIsLogin={setIsLogin}
