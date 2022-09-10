@@ -1,5 +1,6 @@
 import React from "react";
 import user from "../assets/user.png";
+import { Fade } from "react-reveal";
 
 export function StatsBoardTableList({ data, index }) {
   // seconds to years, months, days, hours
@@ -38,28 +39,30 @@ export function StatsBoardTableList({ data, index }) {
   }
 
   return (
-    <a className="home__stats__board__table__list">
-      <div className="home__stats__board__table__list__entry">
-        <span></span> {index + 1}
-      </div>
-      <div className="home__stats__board__table__list__entry">
-        <span>Name</span>
-        <img
-          // src={"https://www.gravatar.com/" + getImage(data.email)}
-          src={user}
-          alt="user"
-        />
-        {data.email}
-      </div>
-      <div className="home__stats__board__table__list__entry">
-        <span>Speed</span> {data.score} wpm
-      </div>
-      <div className="home__stats__board__table__list__entry">
-        <span>Time</span>
-        {getTime(parseInt(Date.now() / 1000) - data.time) === "now"
-          ? "now"
-          : getTime(parseInt(Date.now() / 1000) - data.time) + "ago"}
-      </div>
-    </a>
+    <Fade bottom>
+      <a className="home__stats__board__table__list">
+        <div className="home__stats__board__table__list__entry">
+          <span></span> {index + 1}
+        </div>
+        <div className="home__stats__board__table__list__entry">
+          <span>Name</span>
+          <img
+            // src={"https://www.gravatar.com/" + getImage(data.email)}
+            src={user}
+            alt="user"
+          />
+          {data.email}
+        </div>
+        <div className="home__stats__board__table__list__entry">
+          <span>Speed</span> {data.score} wpm
+        </div>
+        <div className="home__stats__board__table__list__entry">
+          <span>Time</span>
+          {getTime(parseInt(Date.now() / 1000) - data.time) === "now"
+            ? "now"
+            : getTime(parseInt(Date.now() / 1000) - data.time) + "ago"}
+        </div>
+      </a>
+    </Fade>
   );
 }

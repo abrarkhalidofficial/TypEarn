@@ -3,8 +3,10 @@ import React, { useEffect } from "react";
 import car from "../assets/car.png";
 import { StatsBoardFilterEntry } from "../components/StatsBoardFilterEntry";
 import { StatsBoardTableList } from "../components/StatsBoardTableList";
+import { Fade } from "react-reveal";
 
 export default function Home({ setIsStartGame, user, setIsLogin }) {
+  const [limit, setLimit] = React.useState(10);
   const [stats, setStats] = React.useState([]);
   function getScores() {
     axios.get("http://54.242.116.71:8000/scores").then((res) => {
@@ -25,39 +27,53 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
     getLatest();
   }, []);
 
+  console.log(window.scrollY);
+
   return (
     <>
       <div className="home__banner">
         <div className="home__banner__content">
           <div className="home__banner__content__left">
-            <div className="home__banner__content__left__heading">TypEarn</div>
-            <div className="home__banner__content__left__info">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonly used to demonstrate the visual form of a document or
-              a typeface without relying on meaningful content. Lorem ipsum may
-              be used as a placeholder before final copy is available. Wikipedia
-            </div>
-            <button
-              className="home__banner__content__left__button"
-              onClick={() => {
-                user === null ? setIsLogin(true) : setIsStartGame(true);
-              }}
-            >
-              Start the game
-            </button>
+            <Fade bottom>
+              <div className="home__banner__content__left__heading">
+                TypEarn
+              </div>
+            </Fade>
+            <Fade bottom>
+              <div className="home__banner__content__left__info">
+                In publishing and graphic design, Lorem ipsum is a placeholder
+                text commonly used to demonstrate the visual form of a document
+                or a typeface without relying on meaningful content. Lorem ipsum
+                may be used as a placeholder before final copy is available.
+                Wikipedia
+              </div>
+            </Fade>
+            <Fade bottom>
+              <button
+                className="home__banner__content__left__button"
+                onClick={() => {
+                  user === null ? setIsLogin(true) : setIsStartGame(true);
+                }}
+              >
+                Start the game
+              </button>
+            </Fade>
           </div>
           <div className="home__banner__content__right">
-            <img
-              src={car}
-              alt="car"
-              className="home__banner__content__right__img"
-            />
+            <Fade bottom distance="30%">
+              <img
+                src={car}
+                alt="car"
+                className="home__banner__content__right__img"
+              />
+            </Fade>
           </div>
         </div>
       </div>
       <div className="home__stats__board__filter">
         <StatsBoardFilterEntry
           defaultChecked
+          delay={1000}
           onClick={getLatest}
           svg={
             <svg
@@ -78,6 +94,7 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
         />
         <StatsBoardFilterEntry
           onClick={getMyScore}
+          delay={1200}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,6 +114,7 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
         />
         <StatsBoardFilterEntry
           onClick={getScores}
+          delay={1400}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +135,7 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
         />
         <StatsBoardFilterEntry
           onClick={getScores}
+          delay={1600}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -137,15 +156,38 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
         />
       </div>
       <div className="home__stats__board__table">
-        <div className="home__stats__board__table__header">
-          <div className="home__stats__board__table__header__entry" />
-          <div className="home__stats__board__table__header__entry">Name</div>
-          <div className="home__stats__board__table__header__entry">Speed</div>
-          <div className="home__stats__board__table__header__entry">Time</div>
-        </div>
-        {stats.map((stat, index) => (
-          <StatsBoardTableList index={index} key={index} data={stat} />
-        ))}
+        <Fade bottom>
+          <div className="home__stats__board__table__header">
+            <div className="home__stats__board__table__header__entry" />
+            <div className="home__stats__board__table__header__entry">Name</div>
+            <div className="home__stats__board__table__header__entry">
+              Speed
+            </div>
+            <div className="home__stats__board__table__header__entry">Time</div>
+          </div>
+        </Fade>
+        {stats
+          .filter((stat, i) => i < limit)
+          .map((stat, index) => (
+            <StatsBoardTableList index={index} key={index} data={stat} />
+          ))}
+        <section
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            onClick={() => {
+              setLimit(limit + 10);
+            }}
+            className="header__nav__button"
+            style={{ margin: "0em auto", marginTop: "2em" }}
+          >
+            Load more
+          </button>
+        </section>
       </div>
     </>
   );
