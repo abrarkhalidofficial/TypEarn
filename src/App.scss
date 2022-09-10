@@ -585,6 +585,9 @@ body {
   background-color: black;
   color: white;
 }
+.home__nfts__card__button:disabled {
+  background-color: #000000;
+}
 .reward__entry {
   display: flex;
   align-items: center;

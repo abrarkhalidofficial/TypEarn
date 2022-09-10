@@ -1,8 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Fade } from "react-reveal";
 import stake from "../assets/stake.png";
+import local from "../assets/local.json";
+import { ethers } from "ethers";
+import { TableRow } from "./TableRow";
 
 export default function Staked() {
+  const [tableData, setTableData] = useState([]);
+  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+  async function unStake(value) {
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+
+    const usdcContract = new ethers.Contract(
+      local.nftManager.address,
+      local.nftManager.abi,
+      signer
+    );
+
+    const tx = await usdcContract.unstake(value, {
+      gasPrice: 20e9,
+    });
+    console.log(`Transaction hash: ${tx.hash}`);
+
+    const receipt = await tx.wait();
+    console.log(`Transaction confirmed in block ${receipt.blockNumber}`);
+    console.log(`Gas used: ${receipt.gasUsed.toString()}`);
+    onStakeQuery();
+  }
+
+  async function onStakeQuery() {
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    let userAddress = await signer.getAddress();
+
+    const usdcContract = new ethers.Contract(
+      local.nftManager.address,
+      local.nftManager.abi,
+      signer
+    );
+
+    let query = await usdcContract.userData(userAddress);
+
+    console.log("tabledata", query[1]);
+    setTableData(query[1]);
+  }
+
+  useEffect(() => {
+    onStakeQuery();
+  }, []);
+
   return (
     <>
       <div className="home__banner" style={{ background: "transparent" }}>
@@ -25,69 +73,34 @@ export default function Staked() {
           </div>
         </div>
       </div>
-      {/* <div className="home__search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24.994"
-          height="25"
-          viewBox="0 0 24.994 25"
-        >
-          <path
-            id="Icon_ionic-ios-search"
-            data-name="Icon ionic-ios-search"
-            d="M29.2,27.684l-6.951-7.016a9.906,9.906,0,1,0-1.5,1.523l6.906,6.971a1.07,1.07,0,0,0,1.51.039A1.077,1.077,0,0,0,29.2,27.684ZM14.465,22.275A7.822,7.822,0,1,1,20,19.984,7.774,7.774,0,0,1,14.465,22.275Z"
-            transform="translate(-4.5 -4.493)"
-            fill="#fff"
-          />
-        </svg>
-        <input
-          type="text"
-          placeholder="Search here"
-          className="home__search__field"
-        />
-      </div> */}
       <div className="home__stats__board__table">
         <Fade bottom>
           <div className="home__stats__board__table__header">
-            <div className="home__stats__board__table__header__entry" />
-            <div className="home__stats__board__table__header__entry">Name</div>
+            <div
+              className="home__stats__board__table__header__entry"
+              style={{ maxWidth: 100 }}
+            />
             <div className="home__stats__board__table__header__entry">
-              Speed
+              Staking Date
             </div>
-            <div className="home__stats__board__table__header__entry">Time</div>
             <div className="home__stats__board__table__header__entry">
-              Stake
+              Amount
+            </div>
+            <div className="home__stats__board__table__header__entry">
+              Unstaking Allowed After <span>(Remaining Days)</span>
+            </div>
+            <div className="home__stats__board__table__header__entry">
+              Reward earned
+            </div>
+            <div className="home__stats__board__table__header__entry">APR</div>
+            <div className="home__stats__board__table__header__entry">
+              Unstake
             </div>
           </div>
         </Fade>
-        <Fade bottom>
-          <a className="home__stats__board__table__list">
-            <div className="home__stats__board__table__list__entry">
-              {/* <span></span> {index + 1} */}
-            </div>
-            <div className="home__stats__board__table__list__entry">
-              <span>Name</span>
-              <img
-                // src={"https://www.gravatar.com/" + getImage(data.email)}
-                // src={user}
-                alt="user"
-              />
-              {/* {data.email} */}
-            </div>
-            <div className="home__stats__board__table__list__entry">
-              {/* <span>Speed</span> {data.score} wpm */}
-            </div>
-            <div className="home__stats__board__table__list__entry">
-              <span>Time</span>
-              {/* {getTime(parseInt(Date.now() / 1000) - data.time) === "now"
-            ? "now"
-            : getTime(parseInt(Date.now() / 1000) - data.time) + "ago"} */}
-            </div>
-            <div className="home__stats__board__table__list__entry">
-              <button className="home__nfts__card__button">Stake</button>
-            </div>
-          </a>
-        </Fade>
+        {tableData.map((item, index) => (
+          <TableRow item={item} key={index} unStake={unStake} />
+        ))}
       </div>
     </>
   );
