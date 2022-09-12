@@ -50,7 +50,7 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
               <button
                 className="home__banner__content__left__button"
                 onClick={() => {
-                  user === null ? setIsLogin(true) : setIsStartGame(true);
+                  setIsStartGame(true);
                 }}
               >
                 Start the game

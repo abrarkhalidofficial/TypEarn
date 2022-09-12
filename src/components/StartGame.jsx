@@ -12,9 +12,17 @@ export default function StartGame({ setIsStartGame, email }) {
   const [idOfGame, setIdOfGame] = React.useState(0);
 
   function join_random() {
-    socket.send("2" + " " + email + " " + noOfParticipants + " silver");
-    navigate("/game");
-    setIsStartGame(false);
+    grecaptcha.ready(function () {
+      grecaptcha
+        .execute("6LcdwvEhAAAAAON3SVQvV3NFVGwu1jEtabNPKKsu", {
+          action: "submit",
+        })
+        .then(function (token) {
+          socket.send("2" + " " + email + " " + noOfParticipants + " silver");
+          navigate("/game");
+          setIsStartGame(false);
+        });
+    });
   }
   function create_game() {
     socket.send(

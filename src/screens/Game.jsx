@@ -137,13 +137,13 @@ export default function Game({
             <div className="game__container__main">
               {dataFromApi?.gameData?.players
                 ?.filter((player, i) => i === dataFromApi?.myIndex)
-                .map((palyer) => (
-                  <GamePlayerEntry key={JSON.stringify(palyer)} data={palyer} />
+                .map((palyer, i) => (
+                  <GamePlayerEntry key={i} data={palyer} />
                 ))}
               {dataFromApi?.gameData?.players
                 ?.filter((player, i) => i !== dataFromApi?.myIndex)
-                .map((palyer) => (
-                  <GamePlayerEntry key={JSON.stringify(palyer)} data={palyer} />
+                .map((palyer, i) => (
+                  <GamePlayerEntry key={i} data={palyer} />
                 ))}
             </div>
           </div>
