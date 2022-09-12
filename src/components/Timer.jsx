@@ -6,7 +6,7 @@ export default function Timer({ value, setIsTimerOpen, noJoin }) {
       setIsTimerOpen(false);
     }
   }, [value]);
-  console.log(noJoin);
+
   return (
     <div className="popup">
       <div

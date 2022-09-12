@@ -8,7 +8,7 @@ export default function StartGame({ setIsStartGame, email }) {
   const [isJoinOrCreate, setIsJoinOrCreate] = React.useState(false);
   const [isJoinById, setIsJoinById] = React.useState(false);
   const [isCreateGame, setIsCreateGame] = React.useState(false);
-  const [noOfParticipants, setNoOfParticipants] = React.useState(0);
+  const [noOfParticipants, setNoOfParticipants] = React.useState(6);
   const [idOfGame, setIdOfGame] = React.useState(0);
 
   function join_random() {
@@ -32,7 +32,7 @@ export default function StartGame({ setIsStartGame, email }) {
 
   return (
     <div className="popup">
-      <div className="popup__start__game__form" style={{ maxWidth: "800px" }}>
+      <div className="popup__start__game__form" style={{ maxWidth: "500px" }}>
         {isJoinOrCreate ? (
           <>
             <input
@@ -48,9 +48,11 @@ export default function StartGame({ setIsStartGame, email }) {
               }}
               min="1"
               max="6"
+              value={noOfParticipants}
               onChange={(e) => {
                 setNoOfParticipants(e.target.value);
               }}
+              disabled
               placeholder="Enter no of players"
             />
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -141,10 +143,7 @@ export default function StartGame({ setIsStartGame, email }) {
           <>
             <div className="popup__start__game__form__content">
               <StartGameFormEntry
-                onClick={() => {
-                  setIsJoinOrCreate(true);
-                  setIsCreateGame(false);
-                }}
+                onClick={isCreateGame ? create_game : join_random}
                 smaller
                 icon={
                   <svg
@@ -194,7 +193,7 @@ export default function StartGame({ setIsStartGame, email }) {
                   </>
                 }
               />
-              <StartGameFormEntry
+              {/* <StartGameFormEntry
                 onClick={() => {
                   setIsJoinById(true);
                 }}
@@ -246,8 +245,8 @@ export default function StartGame({ setIsStartGame, email }) {
                     Join <span>By Id</span>
                   </>
                 }
-              />
-              <StartGameFormEntry
+              /> */}
+              {/* <StartGameFormEntry
                 onClick={() => {
                   setIsJoinOrCreate(true);
                   setIsCreateGame(true);
@@ -326,7 +325,7 @@ export default function StartGame({ setIsStartGame, email }) {
                     Create <span>Game</span>
                   </>
                 }
-              />
+              /> */}
             </div>
             <button
               className="popup__start__game__form__button"

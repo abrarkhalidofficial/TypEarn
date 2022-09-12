@@ -69,7 +69,12 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    if (dataFromApi?.auth?.exists === "no") {
+    if (dataFromApi?.auth?.exists === "yes") {
+      socket.send("1" + " " + user?.email);
+    } else if (
+      dataFromApi?.auth?.exists === "no" &&
+      dataFromApi?.auth?.address !== ""
+    ) {
       setIsEmailLogin(true);
     }
   }, [data]);
@@ -77,11 +82,12 @@ function App() {
   useEffect(() => {
     if (dataFromApi?.auth?.exists === "yes") {
       setUser(dataFromApi?.auth?.data);
+      setTimeout(() => {
+        socket.send("1" + " " + user?.email);
+      }, 3000);
     }
   }, [dataFromApi]);
 
-  console.log(dataFromApi);
-  console.log(data.address);
   return (
     <>
       {isScoreCard ? (

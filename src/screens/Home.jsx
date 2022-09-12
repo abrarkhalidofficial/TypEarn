@@ -27,8 +27,6 @@ export default function Home({ setIsStartGame, user, setIsLogin }) {
     getLatest();
   }, []);
 
-  console.log(window.scrollY);
-
   return (
     <>
       <div className="home__banner">

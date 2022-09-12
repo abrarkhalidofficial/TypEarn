@@ -17,8 +17,6 @@ export default function EmailLogin({ onClose, data, setUser }) {
     };
   }, []);
 
-  console.log(name, email, image);
-
   return (
     <div className="popup__reverse">
       <form
@@ -77,7 +75,6 @@ export default function EmailLogin({ onClose, data, setUser }) {
           />
           <FileUpload
             onChange={(e) => {
-              console.log(e);
               setImage(e);
             }}
           />
@@ -106,7 +103,6 @@ function FileUpload({ onChange }) {
           setUploadedFile(URL.createObjectURL(e.target.files[0]));
           imageToBase64(URL.createObjectURL(e.target.files[0]))
             .then((response) => {
-              console.log(response);
               onChange(response);
             })
             .catch((error) => {

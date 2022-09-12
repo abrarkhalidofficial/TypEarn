@@ -32,7 +32,7 @@ export function StartGameFormEntry({
         }, 100);
       }}
       className="popup__start__game__form__content__entry"
-      style={smaller ? { width: "32%" } : null}
+      style={smaller ? { width: "100%" } : null}
     >
       <div className="popup__start__game__form__content__entry__icon">
         {hover ? iconActive : icon}

@@ -19,17 +19,15 @@ export default function Game({
       console.log("user not logged in");
     }
   }, []);
-
+  const [textColor, setTextColor] = React.useState(false);
   const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
-  console.log(dataFromApi);
   const [gameStarted, setGameStarted] = React.useState(false);
   const [disable, setDisable] = React.useState(false);
 
   useEffect(() => {
     setWinners(dataFromApi.gameData.positions);
   }, [dataFromApi.gameData.positions]);
-  console.log(dataFromApi?.gameData?.light === 2);
   useEffect(() => {
     if (dataFromApi?.gameData?.light === 2) {
       setGameStarted(true);
@@ -41,22 +39,38 @@ export default function Game({
   }, [dataFromApi.gameData.light]);
 
   function showCurrentValue(event) {
+    let next = false;
     let list = dataFromApi?.gameData?.sentence?.split(" ");
     let value = event.target.value;
+
     setTypedString(value);
+    setTextColor(false);
     if (dataFromApi?.currentWord != list.length) {
       if (dataFromApi?.currentWord + 1 != list.length) {
         if (list[dataFromApi?.currentWord] + " " == value) {
           socket.send("6" + " " + user?.email);
+          next = true;
           setTypedString("");
         }
       } else {
         if (list[dataFromApi?.currentWord] == value) {
           socket.send("6" + " " + user?.email);
+          next = true;
           setTypedString("");
           setDisable(true);
           setIsScoreCard(true);
         }
+      }
+    }
+    if (!next) {
+      if (value.length > list[dataFromApi?.currentWord].length) {
+        setTextColor(true);
+      } else if (
+        list[dataFromApi?.currentWord].slice(0, value.length) !== value
+      ) {
+        setTextColor(true);
+      } else {
+        setTextColor(false);
       }
     }
   }
@@ -153,7 +167,15 @@ export default function Game({
                     }
                     key={i}
                   >
-                    {word}
+                    <span
+                      style={
+                        i === dataFromApi?.currentWord && textColor
+                          ? { color: "red" }
+                          : null
+                      }
+                    >
+                      {word}
+                    </span>
                   </span>
                 );
               })}
