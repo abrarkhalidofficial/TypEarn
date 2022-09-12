@@ -89,68 +89,32 @@ export function Header({
                     Rewards
                   </Link>
                 </Fade> */}
-
-                {user === null ? (
-                  <>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        setIsLogin(true);
-                        if (window.innerWidth < 1000) {
-                          setIsOpen(false);
-                        }
+                {user === null ? null : (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    <img
+                      src={"data:image/png;base64," + user?.photo}
+                      alt={user?.name}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
                       }}
-                      className="header__nav__button"
-                    >
-                      Login
-                    </a>
-                  </>
+                    />
+                  </div>
+                )}
+                {dataWallet.Balance === null ? (
+                  <a onClick={connectWallet} className="header__nav__button">
+                    Connect Wallet
+                  </a>
                 ) : (
                   <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        fontSize: 14,
-                      }}
-                    >
-                      <img
-                        src={user.photoURL}
-                        alt={user.displayName}
-                        style={{
-                          width: 50,
-                          height: 50,
-                          borderRadius: 50,
-                        }}
-                      />
-                      {/* {user.displayName} */}
-                    </div>
-                    {dataWallet.Balance === null ? (
-                      <a
-                        onClick={connectWallet}
-                        className="header__nav__button"
-                      >
-                        Connect Wallet
-                      </a>
-                    ) : (
-                      <a className="header__nav__button">Connected Wallet</a>
-                    )}
-
-                    <a
-                      href="#"
-                      onClick={() => {
-                        logout(setUser);
-                        setUser(null);
-                      }}
-                      className="header__nav__button"
-                      style={{
-                        background: "#242424",
-                        color: "white",
-                        borderColor: "white",
-                      }}
-                    >
-                      Logout
-                    </a>
+                    <a className="header__nav__button">Wallet Connected</a>
                   </>
                 )}
               </div>

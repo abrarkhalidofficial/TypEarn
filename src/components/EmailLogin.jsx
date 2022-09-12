@@ -1,11 +1,14 @@
 import React from "react";
-import CheckBox from "./Checkbox";
 import logo from "../assets/logo.png";
 import { X } from "react-feather";
 import { useEffect } from "react";
+import imageToBase64 from "image-to-base64/browser";
+import { socket } from "../utils/socket";
 
-export default function EmailLogin({ onClose }) {
-  const [isChecked, setIschecked] = React.useState(false);
+export default function EmailLogin({ onClose, data, setUser }) {
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [image, setImage] = React.useState("");
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -14,11 +17,26 @@ export default function EmailLogin({ onClose }) {
     };
   }, []);
 
+  console.log(name, email, image);
+
   return (
     <div className="popup__reverse">
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           onClose(false);
+          socket.send(
+            "9" +
+              "\n" +
+              data?.address +
+              "\n" +
+              name +
+              "\n" +
+              email +
+              "\n" +
+              image
+          );
+          socket.send("8" + " " + data?.address).data;
         }}
         className="popup__reverse__form"
       >
@@ -42,28 +60,25 @@ export default function EmailLogin({ onClose }) {
           <input
             type="text"
             placeholder="Enter your name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
             className="popup__reverse__form__content__input"
           />
           <input
-            type="text"
-            placeholder="Enter your username"
+            type="email"
+            placeholder="Enter your email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
             className="popup__reverse__form__content__input"
           />
-          <FileUpload />
-          <CheckBox
-            value={isChecked}
-            label={
-              <>
-                I agree to the <a href="#">Terms & Conditions</a>
-              </>
-            }
-            labelColor="#242424"
-            checkedColor="linear-gradient(#42ac4e,#446648)"
-            unCheckedColor="#f3f3f3"
-            iconColor={"#ffffff"}
-            style={{ borderRadius: 50 }}
-            onChange={() => {
-              isChecked ? setIschecked(false) : setIschecked(true);
+          <FileUpload
+            onChange={(e) => {
+              console.log(e);
+              setImage(e);
             }}
           />
           <button
@@ -78,7 +93,7 @@ export default function EmailLogin({ onClose }) {
   );
 }
 
-function FileUpload({}) {
+function FileUpload({ onChange }) {
   const [uploadedFile, setUploadedFile] = React.useState("");
   return (
     <div
@@ -89,11 +104,20 @@ function FileUpload({}) {
         type="file"
         onChange={(e) => {
           setUploadedFile(URL.createObjectURL(e.target.files[0]));
+          imageToBase64(URL.createObjectURL(e.target.files[0]))
+            .then((response) => {
+              console.log(response);
+              onChange(response);
+            })
+            .catch((error) => {
+              console.log("image", error);
+            });
         }}
         multiple={false}
-        onAbort={(e) => {
+        onAbort={() => {
           setUploadedFile("");
         }}
+        required
         className="popup__reverse__form__content__upload__input"
       />
       {uploadedFile === "" ? (

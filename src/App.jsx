@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ethers } from "ethers";
 import { socket } from "./utils/socket";
@@ -47,16 +47,13 @@ function App() {
       })
       .then((balance) => {
         setdata({
+          address: address,
           Balance: ethers.utils.formatEther(balance),
         });
       });
   };
 
   const accountChangeHandler = (account) => {
-    setdata({
-      address: account,
-    });
-
     getbalance(account);
   };
 
@@ -64,6 +61,27 @@ function App() {
     const js = JSON.parse(event.data);
     setDataFromApi(js);
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      socket.send("8" + " " + data?.address);
+    }, 3000);
+  }, [data]);
+
+  useEffect(() => {
+    if (dataFromApi?.auth?.exists === "no") {
+      setIsEmailLogin(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (dataFromApi?.auth?.exists === "yes") {
+      setUser(dataFromApi?.auth?.data);
+    }
+  }, [dataFromApi]);
+
+  console.log(dataFromApi);
+  console.log(data.address);
   return (
     <>
       {isScoreCard ? (
@@ -74,7 +92,9 @@ function App() {
           user={user}
         />
       ) : null}
-      {isEmailLogin ? <EmailLogin onClose={setIsEmailLogin} /> : null}
+      {isEmailLogin ? (
+        <EmailLogin onClose={setIsEmailLogin} data={data} />
+      ) : null}
       {isStartGame ? (
         <StartGame setIsStartGame={setIsStartGame} email={user?.email} />
       ) : null}
