@@ -7,6 +7,7 @@ import lightGreen from "../assets/game_assets/lightGreen.png";
 import { GamePlayerEntry } from "./GamePlayerEntry";
 import { socket } from "../utils/socket";
 import Timer from "../components/Timer";
+import { useNavigate } from "react-router-dom";
 
 export default function Game({
   dataFromApi,
@@ -14,11 +15,13 @@ export default function Game({
   setIsScoreCard,
   setWinners,
 }) {
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!user) {
-      console.log("user not logged in");
+    if (user === null) {
+      navigate("/");
     }
   }, []);
+  console.log(dataFromApi);
   const [textColor, setTextColor] = React.useState(false);
   const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
@@ -26,8 +29,8 @@ export default function Game({
   const [disable, setDisable] = React.useState(false);
 
   useEffect(() => {
-    setWinners(dataFromApi.gameData.positions);
-  }, [dataFromApi.gameData.positions]);
+    setWinners(dataFromApi?.gameData?.positions);
+  }, [dataFromApi?.gameData?.positions]);
   useEffect(() => {
     if (dataFromApi?.gameData?.light === 2) {
       setGameStarted(true);
@@ -36,7 +39,7 @@ export default function Game({
         socket.send("5" + " " + user?.email);
       }, 1000);
     }
-  }, [dataFromApi.gameData.light]);
+  }, [dataFromApi?.gameData?.light]);
 
   function showCurrentValue(event) {
     let next = false;
@@ -79,7 +82,7 @@ export default function Game({
       {isTimerOpen ? (
         <Timer
           setIsTimerOpen={setIsTimerOpen}
-          value={dataFromApi.gameData.timer}
+          value={dataFromApi?.gameData?.timer}
           noJoin={dataFromApi?.gameData?.timer === undefined}
         />
       ) : null}

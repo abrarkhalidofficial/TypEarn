@@ -5,7 +5,7 @@ import { StatsBoardFilterEntry } from "../components/StatsBoardFilterEntry";
 import { StatsBoardTableList } from "../components/StatsBoardTableList";
 import { Fade } from "react-reveal";
 
-export default function Home({ setIsStartGame, user, setIsLogin }) {
+export default function Home({ setIsStartGame, user }) {
   const [limit, setLimit] = React.useState(10);
   const [stats, setStats] = React.useState([]);
   function getScores() {

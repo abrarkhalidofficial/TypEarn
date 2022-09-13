@@ -77,11 +77,13 @@ body {
   border: 1px solid white;
   border-radius: 5px;
   margin-left: 1em;
+  cursor: pointer;
 }
 .header__nav__button:hover {
   transition: 300ms ease-in-out;
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 .home__banner {
   background: linear-gradient(90deg, #446648, #88cb90);

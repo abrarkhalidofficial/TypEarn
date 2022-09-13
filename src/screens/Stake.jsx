@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 import { StatsBoardFilterEntry } from "./StatsBoardFilterEntry";
 import { NFTCard } from "./NFTCard";
 
-export default function Stake({ setIsStartGame, user, setIsLogin }) {
+export default function Stake() {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -115,12 +115,7 @@ export default function Stake({ setIsStartGame, user, setIsLogin }) {
               a typeface without relying on meaningful content. Lorem ipsum may
               be used as a placeholder before final copy is available. Wikipedia
             </div>
-            <button
-              className="home__banner__content__left__button"
-              onClick={() => {
-                user === null ? setIsLogin(true) : setIsStartGame(true);
-              }}
-            >
+            <button className="home__banner__content__left__button">
               Let's Stake
             </button>
           </div>

@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "react-feather";
-import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
-import logoLight from "../assets/logoLight.png";
-import { logout } from "../services/auth";
 import OutsideClickHandler from "react-outside-click-handler";
+import { Link, useNavigate } from "react-router-dom";
+import logoLight from "../assets/logoLight.png";
+import { Menu, X } from "react-feather";
+import logo from "../assets/logo.png";
 import { Fade } from "react-reveal";
 
-export function Header({
-  dataWallet,
-  setUser,
-  setIsLogin,
-  user,
-  connectWallet,
-}) {
+export function Header({ dataWallet, setUser, user, connectWallet }) {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     if (window.innerWidth < 1000) {
@@ -114,7 +108,15 @@ export function Header({
                   </a>
                 ) : (
                   <>
-                    <a className="header__nav__button">Wallet Connected</a>
+                    <a
+                      onClick={() => {
+                        setUser(null);
+                        navigate("/");
+                      }}
+                      className="header__nav__button"
+                    >
+                      Wallet Connected
+                    </a>
                   </>
                 )}
               </div>

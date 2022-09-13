@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import { socket } from "./utils/socket";
 import { Header } from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./components/Login";
 import StartGame from "./components/StartGame";
 import Game from "./screens/Game";
 import Home from "./screens/Home";
@@ -18,7 +17,6 @@ import "./App.scss";
 function App() {
   const [user, setUser] = useState(null);
   const [isStartGame, setIsStartGame] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   const [isScoreCard, setIsScoreCard] = useState(false);
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const [dataFromApi, setDataFromApi] = useState([]);
@@ -66,9 +64,6 @@ function App() {
     setTimeout(() => {
       socket.send("8" + " " + data?.address);
     }, 3000);
-  }, [data]);
-
-  useEffect(() => {
     if (dataFromApi?.auth?.exists === "yes") {
       socket.send("1" + " " + user?.email);
     } else if (
@@ -83,8 +78,9 @@ function App() {
     if (dataFromApi?.auth?.exists === "yes") {
       setUser(dataFromApi?.auth?.data);
       setTimeout(() => {
-        socket.send("1" + " " + user?.email);
+        socket.send("1" + " " + dataFromApi?.auth?.data?.email);
       }, 3000);
+      console.log("running");
     }
   }, [dataFromApi]);
 
@@ -104,10 +100,8 @@ function App() {
       {isStartGame ? (
         <StartGame setIsStartGame={setIsStartGame} email={user?.email} />
       ) : null}
-      {isLogin ? <Login setUser={setUser} setIsLogin={setIsLogin} /> : null}
       <Header
         connectWallet={btnhandler}
-        setIsLogin={setIsLogin}
         user={user}
         setUser={setUser}
         dataWallet={data}
@@ -115,43 +109,19 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Home
-              setIsStartGame={setIsStartGame}
-              user={user}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<Home setIsStartGame={setIsStartGame} user={user} />}
         />
         <Route
           path="/stake"
-          element={
-            <Stake
-              setIsStartGame={setIsStartGame}
-              user={user}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<Stake setIsStartGame={setIsStartGame} user={user} />}
         />
         <Route
           path="/staked"
-          element={
-            <Staked
-              setIsStartGame={setIsStartGame}
-              user={user}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<Staked setIsStartGame={setIsStartGame} user={user} />}
         />
         <Route
           path="/rewards"
-          element={
-            <Rewards
-              setIsStartGame={setIsStartGame}
-              user={user}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<Rewards setIsStartGame={setIsStartGame} user={user} />}
         />
         <Route
           path="/game"
@@ -159,7 +129,6 @@ function App() {
             <Game
               ssetIsStartGame={setIsStartGame}
               user={user}
-              setIsLogin={setIsLogin}
               dataFromApi={dataFromApi}
               setUser={setUser}
               setIsScoreCard={setIsScoreCard}
