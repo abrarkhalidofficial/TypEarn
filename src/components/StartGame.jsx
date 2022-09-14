@@ -43,8 +43,8 @@ export default function StartGame({ setIsStartGame, email }) {
                     y2="1"
                     gradientUnits="objectBoundingBox"
                   >
-                    <stop offset="0" stopColor="#88cb90" />
-                    <stop offset="1" stopColor="#446648" />
+                    <stop offset="0" stopColor="#59db69" />
+                    <stop offset="1" stopColor="#59db69" />
                   </linearGradient>
                 </defs>
                 <path

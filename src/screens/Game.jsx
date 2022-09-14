@@ -165,7 +165,7 @@ export default function Game({
                   <span
                     style={
                       i === dataFromApi?.currentWord
-                        ? { color: "#88cb90", marginRight: ".5em" }
+                        ? { color: "#59db69", marginRight: ".5em" }
                         : { marginRight: ".5em" }
                     }
                     key={i}

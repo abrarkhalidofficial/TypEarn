@@ -4,6 +4,10 @@
   font-family: "Pasajero";
   src: url("./assets/Pasajero.otf");
 }
+
+$primary: #6cc065;
+$white: #ffffff;
+
 *,
 *::after,
 *::before {
@@ -37,7 +41,7 @@ body {
   width: 180px;
 }
 .header__nav__menu {
-  background-color: white;
+  background-color: $white;
   height: 35px;
   width: 35px;
   border-radius: 5px;
@@ -51,8 +55,8 @@ body {
 }
 
 .header__nav__menu__active {
-  background: linear-gradient(90deg, #88cb90, #446648);
-  color: white;
+  background: linear-gradient(90deg, $primary, $primary);
+  color: $white;
 }
 .header__nav {
   display: flex;
@@ -60,7 +64,7 @@ body {
 }
 .header__nav__link {
   font-size: 14px;
-  color: white;
+  color: $white;
   text-decoration: none;
   padding: 0.5em 1em;
 }
@@ -70,23 +74,22 @@ body {
 }
 .header__nav__button {
   font-size: 14px;
-  color: white;
+  color: $white;
   text-decoration: none;
   padding: 0.5em 1.5em;
   background-color: transparent;
-  border: 1px solid white;
+  border: 1px solid $white;
   border-radius: 5px;
   margin-left: 1em;
   cursor: pointer;
 }
 .header__nav__button:hover {
   transition: 300ms ease-in-out;
-  background-color: white;
+  background-color: $white;
   color: black;
   cursor: pointer;
 }
 .home__banner {
-  background: linear-gradient(90deg, #446648, #88cb90);
   width: 100%;
   margin: 0em auto;
   position: relative;
@@ -121,27 +124,27 @@ body {
 .home__banner__content__left__heading {
   font-family: Pasajero, "Montserrat", sans-serif;
   font-size: 40px;
-  color: white;
+  color: $white;
   font-weight: bold;
   margin-bottom: 0.3em;
 }
 .home__banner__content__left__info {
   font-size: 15px;
-  color: white;
+  color: $white;
   margin-bottom: 1.5em;
 }
 .home__banner__content__left__button {
   padding: 1em 2.2em;
-  background-color: white;
+  background-color: $white;
   color: black;
-  border: 1px solid white;
+  border: 1px solid $white;
   cursor: pointer;
   border: none;
 }
 .home__banner__content__left__button:hover {
   transition: 300ms ease-in-out;
-  background-color: #446648;
-  color: white;
+  background-color: $primary;
+  color: $white;
 }
 
 .home__stats__board__filter {
@@ -178,7 +181,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: $white;
 }
 .home__stats__board__filter__entry__content svg {
   margin-bottom: 1.5em;
@@ -191,9 +194,9 @@ body {
 .home__stats__board__filter__entry__input:checked
   ~ .home__stats__board__filter__entry__content {
   transition: 300ms ease-in-out;
-  background: linear-gradient(90deg, #88cb90, #446648);
+  background: linear-gradient(90deg, $primary, $primary);
   border-color: transparent !important;
-  color: white;
+  color: $white;
 }
 .home__stats__board__table {
   width: 100%;
@@ -202,7 +205,7 @@ body {
   padding: 0em 2em;
 }
 .home__stats__board__table__header {
-  background: linear-gradient(90deg, #88cb90, #446648);
+  background: linear-gradient(90deg, $primary, $primary);
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -210,7 +213,7 @@ body {
 }
 .home__stats__board__table__header__entry {
   flex: 1;
-  color: white;
+  color: $white;
   font-size: 14px;
   font-weight: bold;
   padding-right: 1em;
@@ -224,7 +227,7 @@ body {
   align-items: center;
   padding: 0.5em 1em;
   margin-top: 1em;
-  color: white;
+  color: $white;
   text-decoration: none;
 }
 .home__stats__board__table__list__entry {
@@ -251,7 +254,7 @@ body {
 .home__stats__board__table__list:hover {
   transition: 300ms ease-in-out;
   background-color: #202020;
-  color: white;
+  color: $white;
 }
 .popup {
   position: absolute;
@@ -285,7 +288,7 @@ body {
   width: 48%;
   height: 250px;
   border-radius: 15px;
-  background-color: white;
+  background-color: $white;
   cursor: pointer;
   border: none;
 }
@@ -300,18 +303,18 @@ body {
 }
 .popup__start__game__form__content__entry:hover {
   transition: 300ms ease-in-out;
-  background: linear-gradient(90deg, #88cb90, #446648);
+  background: linear-gradient(90deg, $primary, $primary);
 }
 .popup__start__game__form__content__entry:hover
   .popup__start__game__form__content__entry__label {
   transition: 200ms ease-in-out;
-  color: white;
+  color: $white;
 }
 .popup__start__game__form__content__entry:hover
   .popup__start__game__form__content__entry__label
   span {
   transition: 300ms ease-in-out;
-  color: white;
+  color: $white;
 }
 .popup__start__game__form__button {
   padding: 0.7em 2em;
@@ -319,7 +322,7 @@ body {
   background-color: #de3131;
   border: 1px solid #f5f5f5;
   border-radius: 5px;
-  color: white;
+  color: $white;
   margin-top: 1.5em;
   cursor: pointer;
 }
@@ -333,7 +336,7 @@ body {
   align-items: center;
   width: 100%;
   margin: 0em auto;
-  background: linear-gradient(45deg, #88cb90, #446648);
+  background: linear-gradient(45deg, $primary, $primary);
   margin-bottom: 4em;
   padding: 3em 2em;
 }
@@ -341,7 +344,7 @@ body {
   font-size: 30px;
   font-family: Pasajero, "Montserrat", sans-serif;
   font-weight: bold;
-  color: white;
+  color: $white;
   margin-bottom: 1em;
 }
 .home__form__input {
@@ -353,7 +356,7 @@ body {
 }
 .home__form__input__label {
   font-size: 14px;
-  color: white;
+  color: $white;
   margin-bottom: 0.5em;
 }
 .home__form__input__field {
@@ -364,10 +367,10 @@ body {
   border: none;
 }
 .home__form__input__field:hover {
-  outline-color: #446648;
+  outline-color: $primary;
 }
 .home__form__input__field:focus {
-  outline-color: #446648;
+  outline-color: $primary;
 }
 .home__form__row {
   display: flex;
@@ -391,12 +394,12 @@ body {
   cursor: pointer;
 }
 .home__form__row__entry__content {
-  color: white;
+  color: $white;
   padding: 0.7em 1.2em;
-  white-space: nowrap;
+  $white-space: nowrap;
   font-size: 14px;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid $white;
   font-weight: 500;
 }
 .home__form__row__entry__input:hover ~ .home__form__row__entry__content {
@@ -404,7 +407,7 @@ body {
   color: black;
 }
 .home__form__row__entry__input:checked ~ .home__form__row__entry__content {
-  background-color: white;
+  background-color: $white;
   color: black;
 }
 .footer__conatiner {
@@ -456,8 +459,8 @@ body {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #64966a, #446648);
-  color: white;
+  background: linear-gradient(135deg, #64966a, $primary);
+  color: $white;
   border-radius: 50px;
 }
 .footer__overlay__content__col__entry svg {
@@ -466,8 +469,8 @@ body {
 }
 .footer__overlay__content__col__entry:hover {
   transition: 300ms ease-in-out;
-  color: white;
-  background: linear-gradient(#446648, #64966a);
+  color: $white;
+  background: linear-gradient($primary, #64966a);
 }
 .footer__overlay__content__col__img {
   width: 180px;
@@ -524,15 +527,15 @@ body {
   border: none;
   outline: none;
   padding-left: 1.5em;
-  color: white;
+  color: $white;
 }
 .home__search:hover {
-  border-color: white;
+  border-color: $white;
   transition: 300ms ease-in-out;
 }
 .home__search:focus-within {
   transition: 300ms ease-in-out;
-  border-color: white;
+  border-color: $white;
 }
 .home__nfts {
   width: 100%;
@@ -545,7 +548,7 @@ body {
 .home__nfts__card {
   width: 31%;
   margin: 1%;
-  background-color: white;
+  background-color: $white;
   padding: 2em;
   padding-top: 0em;
   border: none;
@@ -565,14 +568,14 @@ body {
   font-weight: bold;
 }
 .home__nfts__card:hover {
-  background: linear-gradient(45deg, #88cb90, #446648);
+  background: linear-gradient(45deg, $primary, $primary);
 }
 .home__nfts__card:hover .home__nfts__card__heading {
-  color: white;
+  color: $white;
 }
 .home__nfts__card__button {
-  background-color: #88cb90;
-  color: white;
+  background-color: $primary;
+  color: $white;
   padding: 0.7em 2em;
   border: none;
   border-radius: 5px;
@@ -580,12 +583,12 @@ body {
   cursor: pointer;
 }
 .home__nfts__card:hover .home__nfts__card__button {
-  background-color: white;
+  background-color: $white;
   color: black;
 }
 .home__nfts__card:hover .home__nfts__card__button:hover {
   background-color: black;
-  color: white;
+  color: $white;
 }
 .home__nfts__card__button:disabled {
   background-color: #000000;
@@ -634,13 +637,13 @@ body {
 }
 .reward__entry__right__heading {
   font-size: 20px;
-  color: white;
+  color: $white;
   font-weight: bold;
   margin-bottom: 0.5em;
 }
 .reward__entry__right__info {
   width: 100%;
-  color: white;
+  color: $white;
   font-size: 15px;
 }
 .reward__entry__reverse .reward__entry__left__img {
@@ -665,7 +668,7 @@ body {
   font-size: 30px;
   font-family: Pasajero, "Montserrat", sans-serif;
   font-weight: bold;
-  color: white;
+  color: $white;
 }
 .game__container__header__left span {
   font-size: 14px;
@@ -697,7 +700,7 @@ body {
 .game__container__main__entry__end__done {
   font-size: 16px;
   margin-top: -1em;
-  color: white;
+  color: $white;
   margin-bottom: 1em;
 }
 .checkbox {
@@ -750,7 +753,7 @@ body {
   width: 100%;
   max-width: 500px;
   position: relative;
-  background-color: white;
+  background-color: $white;
   border-radius: 10px;
 }
 .popup__reverse__form__close {
@@ -846,8 +849,8 @@ body {
 .popup__reverse__form__content__button {
   margin-top: 2em;
   height: 40px;
-  background: linear-gradient(#42ac4e, #446648);
-  color: white;
+  background: linear-gradient(#42ac4e, $primary);
+  color: $white;
   border-radius: 5px;
   border: none;
   padding: 0em 2em;
@@ -857,7 +860,7 @@ body {
   cursor: pointer;
 }
 .popup__reverse__form__content__button:hover {
-  background: linear-gradient(#446648, #42ac4e);
+  background: linear-gradient($primary, #42ac4e);
 }
 
 .scorecard__reverse__form__img {
@@ -944,7 +947,7 @@ body {
 .scorecard__reverse__form__content__go__to__home {
   margin-top: 2em;
   height: 38px;
-  background: white;
+  background: $white;
   color: #000000;
   font-size: 14px;
   border-radius: 5px;
@@ -1025,7 +1028,7 @@ body {
     flex-direction: column;
     top: 4.5em;
     left: 0px;
-    background-color: white;
+    background-color: $white;
     width: 100%;
     padding-bottom: 1.5em;
     z-index: 9999;
@@ -1036,8 +1039,8 @@ body {
   .header__nav__button {
     margin-left: 0em;
     margin-top: 0.5em;
-    color: white !important;
-    background: linear-gradient(90deg, #88cb90, #446648);
+    color: $white !important;
+    background: linear-gradient(90deg, $primary, $primary);
   }
 }
 @media (max-width: 768px) {
