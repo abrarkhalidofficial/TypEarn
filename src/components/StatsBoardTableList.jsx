@@ -48,8 +48,9 @@ export function StatsBoardTableList({ data, index }) {
           <span>Name</span>
           <img
             // src={"https://www.gravatar.com/" + getImage(data.email)}
-            src={user}
+            src={"data:image/png;base64," + data.photo}
             alt="user"
+            style={{ borderRadius: 50, height: 40 }}
           />
           {data.email}
         </div>
