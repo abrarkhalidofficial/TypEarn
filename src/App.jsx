@@ -63,16 +63,18 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       socket.send("8" + " " + data?.address);
+      if (dataFromApi?.auth?.exists === "yes") {
+        socket.send("1" + " " + user?.email);
+      } else if (
+        dataFromApi?.auth?.exists === "no" &&
+        dataFromApi?.auth?.address !== ""
+      ) {
+        setIsEmailLogin(true);
+      } else {
+        setIsEmailLogin(false);
+      }
     }, 3000);
-    if (dataFromApi?.auth?.exists === "yes") {
-      socket.send("1" + " " + user?.email);
-    } else if (
-      dataFromApi?.auth?.exists === "no" &&
-      dataFromApi?.auth?.address !== ""
-    ) {
-      setIsEmailLogin(true);
-    }
-  }, [data]);
+  }, [dataFromApi]);
 
   useEffect(() => {
     if (dataFromApi?.auth?.exists === "yes") {

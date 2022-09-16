@@ -99,15 +99,21 @@ function FileUpload({ onChange }) {
     >
       <input
         type="file"
+        accept="image/*"
         onChange={(e) => {
-          setUploadedFile(URL.createObjectURL(e.target.files[0]));
-          imageToBase64(URL.createObjectURL(e.target.files[0]))
-            .then((response) => {
-              onChange(response);
-            })
-            .catch((error) => {
-              console.log("image", error);
-            });
+          if (e.files[0].size > 256 * 1024) {
+            alert("File is too big!");
+            setUploadedFile("");
+          } else {
+            setUploadedFile(URL.createObjectURL(e.target.files[0]));
+            imageToBase64(URL.createObjectURL(e.target.files[0]))
+              .then((response) => {
+                onChange(response);
+              })
+              .catch((error) => {
+                console.log("image", error);
+              });
+          }
         }}
         multiple={false}
         onAbort={() => {
@@ -123,6 +129,7 @@ function FileUpload({ onChange }) {
       ) : (
         <div className="popup__reverse__form__content__upload__content__filled">
           <img
+            multiple={false}
             src={uploadedFile}
             alt="uploaded file"
             className="popup__reverse__form__content__upload__content__filled__img"
