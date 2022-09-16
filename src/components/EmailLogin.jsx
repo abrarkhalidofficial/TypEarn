@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import imageToBase64 from "image-to-base64/browser";
 import { socket } from "../utils/socket";
 
-export default function EmailLogin({ onClose, data, setUser }) {
+export default function EmailLogin({ onClose, data }) {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [image, setImage] = React.useState("");
@@ -101,19 +101,14 @@ function FileUpload({ onChange }) {
         type="file"
         accept="image/*"
         onChange={(e) => {
-          if (e.files[0].size > 256 * 1024) {
-            alert("File is too big!");
-            setUploadedFile("");
-          } else {
-            setUploadedFile(URL.createObjectURL(e.target.files[0]));
-            imageToBase64(URL.createObjectURL(e.target.files[0]))
-              .then((response) => {
-                onChange(response);
-              })
-              .catch((error) => {
-                console.log("image", error);
-              });
-          }
+          setUploadedFile(URL.createObjectURL(e.target.files[0]));
+          imageToBase64(URL.createObjectURL(e.target.files[0]))
+            .then((response) => {
+              onChange(response);
+            })
+            .catch((error) => {
+              console.log("image", error);
+            });
         }}
         multiple={false}
         onAbort={() => {

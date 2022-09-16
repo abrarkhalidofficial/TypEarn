@@ -21,7 +21,6 @@ export default function Game({
       navigate("/");
     }
   }, []);
-  console.log(dataFromApi);
   const [textColor, setTextColor] = React.useState(false);
   const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
@@ -31,6 +30,7 @@ export default function Game({
   useEffect(() => {
     setWinners(dataFromApi?.gameData?.positions);
   }, [dataFromApi?.gameData?.positions]);
+
   useEffect(() => {
     if (dataFromApi?.gameData?.light === 2) {
       setGameStarted(true);

@@ -7,13 +7,12 @@ export default function StartGame({ setIsStartGame, email }) {
   const navigate = useNavigate();
 
   function join_random() {
-    grecaptcha.ready(function () {
+    grecaptcha.ready(() => {
       grecaptcha
         .execute("6LcdwvEhAAAAAON3SVQvV3NFVGwu1jEtabNPKKsu", {
           action: "submit",
         })
-        .then(function (token) {
-          console.log(token);
+        .then(() => {
           socket.send("2" + " " + email + " " + 6 + " silver");
           navigate("/game");
           setIsStartGame(false);

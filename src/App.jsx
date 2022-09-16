@@ -21,48 +21,39 @@ function App() {
   const [isEmailLogin, setIsEmailLogin] = useState(false);
   const [dataFromApi, setDataFromApi] = useState([]);
   const [winners, setWinners] = useState([]);
-
   const [data, setdata] = useState({
     address: "",
     Balance: null,
   });
-
-  const btnhandler = () => {
-    if (window.ethereum) {
-      window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((res) => accountChangeHandler(res[0]));
-    } else {
-      alert("install metamask extension!!");
-    }
-  };
-
-  const getbalance = (address) => {
-    window.ethereum
-      .request({
-        method: "eth_getBalance",
-        params: [address, "latest"],
-      })
-      .then((balance) => {
-        setdata({
-          address: address,
-          Balance: ethers.utils.formatEther(balance),
-        });
-      });
-  };
-
-  const accountChangeHandler = (account) => {
-    getbalance(account);
-  };
 
   socket.addEventListener("message", function (event) {
     const js = JSON.parse(event.data);
     setDataFromApi(js);
   });
 
+  const btnhandler = () => {
+    if (window.ethereum) {
+      window.ethereum.request({ method: "eth_requestAccounts" }).then((res) =>
+        window.ethereum
+          .request({
+            method: "eth_getBalance",
+            params: [res[0], "latest"],
+          })
+          .then((balance) => {
+            setdata({
+              address: res[0],
+              Balance: ethers.utils.formatEther(balance),
+            });
+            socket.send("8" + " " + res[0]);
+          })
+      );
+    } else {
+      alert("install metamask extension!!");
+    }
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      socket.send("8" + " " + data?.address);
       if (dataFromApi?.auth?.exists === "yes") {
         socket.send("1" + " " + user?.email);
       } else if (
@@ -82,7 +73,6 @@ function App() {
       setTimeout(() => {
         socket.send("1" + " " + dataFromApi?.auth?.data?.email);
       }, 3000);
-      console.log("running");
     }
   }, [dataFromApi]);
 
