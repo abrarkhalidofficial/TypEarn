@@ -8,6 +8,7 @@ import { Fade } from "react-reveal";
 export default function Home({ setIsStartGame, user, dataFromApi }) {
   const [limit, setLimit] = React.useState(10);
   const [stats, setStats] = React.useState([]);
+
   function getScores() {
     axios.get("http://54.242.116.71:8000/scores").then((res) => {
       setStats(res.data.data);

@@ -5,6 +5,7 @@ import { StartGameFormEntry } from "./StartGameFormEntry";
 
 export default function StartGame({ setIsStartGame, email }) {
   const navigate = useNavigate();
+  socket.send("7" + " " + email);
 
   function join_random() {
     grecaptcha.ready(() => {
@@ -14,7 +15,6 @@ export default function StartGame({ setIsStartGame, email }) {
         })
         .then(() => {
           if (email !== undefined) {
-            socket.send("7" + " " + email);
             socket.send("2" + " " + email + " " + 6 + " silver");
             navigate("/game");
             setIsStartGame(false);

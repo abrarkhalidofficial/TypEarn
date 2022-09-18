@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import banner from "../assets/banner.png";
 import icon from "../assets/icon.svg";
 import lightRed from "../assets/lightRed.png";
@@ -16,19 +16,23 @@ export default function Game({
   setWinners,
 }) {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (user === null) {
-      navigate("/");
+  useLayoutEffect(() => {
+    // if (user === null) {
+    //   navigate("/");
+    // }
+    if (dataFromApi?.gameData?.timer > 0) {
+      setIsTimerOpen(true);
     }
-    setIsTimerOpen(true);
-  }, []);
+  }, [dataFromApi]);
   const [textColor, setTextColor] = React.useState(false);
   const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
   const [gameStarted, setGameStarted] = React.useState(false);
   const [disable, setDisable] = React.useState(false);
+  const [prev, setPrev] = React.useState(0);
+  const [something, setSomething] = React.useState(false);
 
-  console.log(dataFromApi);
+  // console.log(dataFromApi);
 
   useEffect(() => {
     setWinners(dataFromApi?.gameData?.positions);
@@ -44,24 +48,42 @@ export default function Game({
     }
   }, [dataFromApi?.gameData?.light]);
 
+  useEffect(() => {
+    if (dataFromApi?.currentWord !== prev) {
+      console.log("prev", prev);
+      setPrev(dataFromApi?.currentWord);
+      setSomething(false);
+    }
+  }, [dataFromApi]);
+
   function showCurrentValue(event) {
+    let test = 0;
+    if (something) {
+      test = 1;
+    }
+
     let next = false;
     let list = dataFromApi?.gameData?.sentence?.split(" ");
     let value = event.target.value;
 
+    console.log("66", list[dataFromApi?.currentWord + test]);
+    console.log("test", test);
+    setPrev(dataFromApi?.currentWord);
     setTypedString(value);
     setTextColor(false);
-    if (dataFromApi?.currentWord != list.length) {
-      if (dataFromApi?.currentWord + 1 != list.length) {
-        if (list[dataFromApi?.currentWord] + " " == value) {
+    if (dataFromApi?.currentWord + test < list.length) {
+      if (dataFromApi?.currentWord + test + 1 < list.length) {
+        if (list[dataFromApi?.currentWord + test] + " " == value) {
           socket.send("6" + " " + user?.email);
           next = true;
+          setSomething(true);
           setTypedString("");
         }
       } else {
-        if (list[dataFromApi?.currentWord] == value) {
+        if (list[dataFromApi?.currentWord + test] == value) {
           socket.send("6" + " " + user?.email);
           next = true;
+          setSomething(true);
           setTypedString("");
           setDisable(true);
           setIsScoreCard(true);
@@ -69,10 +91,10 @@ export default function Game({
       }
     }
     if (!next) {
-      if (value.length > list[dataFromApi?.currentWord].length) {
+      if (value.length > list[dataFromApi?.currentWord + test].length) {
         setTextColor(true);
       } else if (
-        list[dataFromApi?.currentWord].slice(0, value.length) !== value
+        list[dataFromApi?.currentWord + test].slice(0, value.length) !== value
       ) {
         setTextColor(true);
       } else {
