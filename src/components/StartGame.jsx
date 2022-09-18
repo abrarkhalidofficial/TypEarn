@@ -13,9 +13,12 @@ export default function StartGame({ setIsStartGame, email }) {
           action: "submit",
         })
         .then(() => {
-          socket.send("2" + " " + email + " " + 6 + " silver");
-          navigate("/game");
-          setIsStartGame(false);
+          if (email !== undefined) {
+            socket.send("7" + " " + email);
+            socket.send("2" + " " + email + " " + 6 + " silver");
+            navigate("/game");
+            setIsStartGame(false);
+          }
         });
     });
   }

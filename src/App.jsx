@@ -101,7 +101,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home setIsStartGame={setIsStartGame} user={user} />}
+          element={
+            <Home
+              setIsStartGame={setIsStartGame}
+              user={user}
+              dataFromApi={dataFromApi}
+            />
+          }
         />
         <Route
           path="/stake"

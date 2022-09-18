@@ -5,7 +5,7 @@ import { StatsBoardFilterEntry } from "../components/StatsBoardFilterEntry";
 import { StatsBoardTableList } from "../components/StatsBoardTableList";
 import { Fade } from "react-reveal";
 
-export default function Home({ setIsStartGame, user }) {
+export default function Home({ setIsStartGame, user, dataFromApi }) {
   const [limit, setLimit] = React.useState(10);
   const [stats, setStats] = React.useState([]);
   function getScores() {
@@ -52,6 +52,12 @@ export default function Home({ setIsStartGame, user }) {
                 onClick={() => {
                   setIsStartGame(true);
                 }}
+                disabled={
+                  dataFromApi.hasOwnProperty("email") &&
+                  dataFromApi?.email !== ""
+                    ? false
+                    : true
+                }
               >
                 Start the game
               </button>

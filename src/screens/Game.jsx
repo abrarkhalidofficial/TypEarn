@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import banner from "../assets/banner.png";
 import icon from "../assets/icon.svg";
-import lightRed from "../assets/game_assets/lightRed.png";
-import lightYellow from "../assets/game_assets/lightYellow.png";
-import lightGreen from "../assets/game_assets/lightGreen.png";
+import lightRed from "../assets/lightRed.png";
+import lightYellow from "../assets/lightYellow.png";
+import lightGreen from "../assets/lightGreen.png";
 import { GamePlayerEntry } from "./GamePlayerEntry";
 import { socket } from "../utils/socket";
 import Timer from "../components/Timer";
@@ -20,12 +20,15 @@ export default function Game({
     if (user === null) {
       navigate("/");
     }
+    setIsTimerOpen(true);
   }, []);
   const [textColor, setTextColor] = React.useState(false);
   const [isTimerOpen, setIsTimerOpen] = React.useState(true);
   const [typedString, setTypedString] = React.useState("");
   const [gameStarted, setGameStarted] = React.useState(false);
   const [disable, setDisable] = React.useState(false);
+
+  console.log(dataFromApi);
 
   useEffect(() => {
     setWinners(dataFromApi?.gameData?.positions);
@@ -94,6 +97,7 @@ export default function Game({
           maxWidth: 1440 - 64,
           marginTop: "6em",
           position: "relative",
+          backgroundColor: "#6cc065",
           borderRadius: 20,
         }}
       >
@@ -172,7 +176,9 @@ export default function Game({
                   >
                     <span
                       style={
-                        i === dataFromApi?.currentWord && textColor
+                        i === dataFromApi?.currentWord && typedString === ""
+                          ? { color: "#59db69" }
+                          : i === dataFromApi?.currentWord && textColor
                           ? { color: "red" }
                           : null
                       }

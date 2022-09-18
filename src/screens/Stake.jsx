@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import bronze from "../assets/game_tiers/bronz.png";
-import diamond from "../assets/game_tiers/dimond.png";
-import gold from "../assets/game_tiers/gold.png";
-import platinium from "../assets/game_tiers/platinum.png";
-import silver from "../assets/game_tiers/silver.png";
+import { StatsBoardFilterEntry } from "./StatsBoardFilterEntry";
+import local from "../assets/local.json";
+import { NFTCard } from "./NFTCard";
+import { ethers } from "ethers";
+
+import bronze from "../assets/bronz.png";
+import diamond from "../assets/dimond.png";
+import gold from "../assets/gold.png";
+import platinium from "../assets/platinum.png";
+import silver from "../assets/silver.png";
 import noData from "../assets/noData.svg";
 import stake from "../assets/stake.png";
-import local from "../assets/local.json";
-import { ethers } from "ethers";
-import { StatsBoardFilterEntry } from "./StatsBoardFilterEntry";
-import { NFTCard } from "./NFTCard";
 
 export default function Stake() {
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -42,7 +43,6 @@ export default function Stake() {
       signer
     );
     let query = await usdcContract.getNFTData();
-    //query = ethers.utils.formatUnits(query, 0);
     setData(query);
   }
 
@@ -137,27 +137,6 @@ export default function Stake() {
           />
         ))}
       </div>
-      {/* <div className="home__search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24.994"
-          height="25"
-          viewBox="0 0 24.994 25"
-        >
-          <path
-            id="Icon_ionic-ios-search"
-            data-name="Icon ionic-ios-search"
-            d="M29.2,27.684l-6.951-7.016a9.906,9.906,0,1,0-1.5,1.523l6.906,6.971a1.07,1.07,0,0,0,1.51.039A1.077,1.077,0,0,0,29.2,27.684ZM14.465,22.275A7.822,7.822,0,1,1,20,19.984,7.774,7.774,0,0,1,14.465,22.275Z"
-            transform="translate(-4.5 -4.493)"
-            fill="#fff"
-          />
-        </svg>
-        <input
-          type="text"
-          placeholder="Search here"
-          className="home__search__field"
-        />
-      </div> */}
       <div className="home__nfts">
         {filteredData.length === 0 ? (
           <div

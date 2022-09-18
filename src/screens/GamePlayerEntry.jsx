@@ -1,6 +1,6 @@
 import React from "react";
-import car from "../assets/game_assets/car.png";
-import finish from "../assets/game_assets/finish.png";
+import car from "../assets/car.png";
+import finish from "../assets/finish.png";
 
 export function GamePlayerEntry({ data }) {
   return (

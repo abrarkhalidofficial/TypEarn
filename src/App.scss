@@ -146,6 +146,10 @@ body {
   background-color: $primary;
   color: $white;
 }
+.home__banner__content__left__button:disabled {
+  background-color: black;
+  color: white;
+}
 
 .home__stats__board__filter {
   width: 100%;
