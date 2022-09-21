@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, useNavigate } from "react-router-dom";
-import logoLight from "../assets/logoLight.png";
+import logoLight from "../assets/logo.svg";
 import { Menu, X } from "react-feather";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.svg";
 import { Fade } from "react-reveal";
 
-export function Header({ dataWallet, setUser, user, connectWallet }) {
+export function Header({ dataWallet, setUser, user, connectWallet, setdata }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -68,57 +68,88 @@ export function Header({ dataWallet, setUser, user, connectWallet }) {
               }}
             >
               <div className="header__nav " style={{ top: 0 }}>
-                <Fade top>
-                  <Link to="/stake" className="header__nav__link">
-                    Stake
-                  </Link>
-                </Fade>
-                <Fade top>
-                  <Link to="/staked" className="header__nav__link">
-                    Staked
-                  </Link>
-                </Fade>
-                {/* <Fade top>
-                  <Link to="/rewards" className="header__nav__link">
-                    Rewards
-                  </Link>
-                </Fade> */}
-                {user === null ? null : (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      fontSize: 14,
-                    }}
-                  >
-                    <img
-                      src={"data:image/png;base64," + user?.photo}
-                      alt={user?.name}
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 50,
-                      }}
-                    />
-                  </div>
-                )}
-                {dataWallet.Balance === null ? (
-                  <a onClick={connectWallet} className="header__nav__button">
-                    Connect Wallet
-                  </a>
+                {user === null ? (
+                  <>
+                    <Fade top>
+                      <a href="#home" className="header__nav__link">
+                        Home
+                      </a>
+                    </Fade>
+                    <Fade top>
+                      <a href="#about" className="header__nav__link">
+                        About Us
+                      </a>
+                    </Fade>
+                    <Fade top>
+                      <a href="#roadmap" className="header__nav__link">
+                        Raodmap
+                      </a>
+                    </Fade>
+                    <Fade top>
+                      <a href="#partners" className="header__nav__link">
+                        Partners
+                      </a>
+                    </Fade>
+                    <Fade top>
+                      <a href="#teams" className="header__nav__link">
+                        Teams
+                      </a>
+                    </Fade>
+                  </>
                 ) : (
                   <>
-                    <a
-                      onClick={() => {
-                        setUser(null);
-                        navigate("/");
+                    <Fade top>
+                      <Link to="/stake" className="header__nav__link">
+                        Stake
+                      </Link>
+                    </Fade>
+                    <Fade top>
+                      <Link to="/staked" className="header__nav__link">
+                        Staked
+                      </Link>
+                    </Fade>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: 14,
                       }}
-                      className="header__nav__button"
                     >
-                      Wallet Connected
-                    </a>
+                      <img
+                        src={"data:image/png;base64," + user?.photo}
+                        alt={user?.name}
+                        style={{
+                          width: 50,
+                          height: 50,
+                          borderRadius: 50,
+                        }}
+                      />
+                    </div>
                   </>
                 )}
+
+                <a
+                  onClick={
+                    dataWallet.Balance === null
+                      ? connectWallet
+                      : () => {
+                          setUser(null);
+                          setdata({
+                            address: "",
+                            Balance: null,
+                          });
+                          navigate("/");
+                        }
+                  }
+                  className="header__nav__link__btn"
+                >
+                  <span>
+                    {dataWallet.Balance === null
+                      ? "Connect Wallet"
+                      : "Wallet Connected"}
+                  </span>
+                  <div className="liquid"></div>
+                </a>
               </div>
             </OutsideClickHandler>
           </div>

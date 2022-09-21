@@ -26,6 +26,9 @@ body {
   left: 0px;
   width: 100%;
   z-index: 9999;
+  background-color: rgb(0, 0, 0, 0.5);
+  // filter: blur(8px);
+  // -webkit-filter: blur(8px);
 }
 .header {
   width: 100%;
@@ -34,7 +37,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em 2em;
+  padding: 0.7em 2em;
   position: relative;
 }
 .header__logo__img {
@@ -89,6 +92,199 @@ body {
   color: black;
   cursor: pointer;
 }
+.header__nav__link__btn {
+  position: relative;
+  padding: 12px 36px;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  border-radius: 0px;
+  border: none;
+  transform: skewX(-0.3rad);
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+.header__nav__link__btn span {
+  position: relative;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.header__nav__link__btn .liquid {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(90deg, #b54893, #0db4ea);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+.header__nav__link__btn .liquid::after,
+.header__nav__link__btn .liquid::before {
+  content: "";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background: transparent;
+}
+
+.header__nav__link__btn .liquid::before {
+  border-radius: 45%;
+  // background: rgba(20, 20, 20, 1);
+  animation: animate 5s linear infinite;
+}
+
+.header__nav__link__btn .liquid::after {
+  border-radius: 40%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 10s linear infinite;
+}
+
+.header__nav__link__btn:hover .liquid {
+  top: -120px;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+.home__section {
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
+  position: relative;
+}
+.home__section__img {
+  width: 100%;
+  height: 100%;
+}
+.home__section__overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home__section__overlay__content {
+  padding: 2em;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  width: 100%;
+  max-width: 1000px;
+}
+.home__section__overlay__content__icon {
+  position: absolute;
+  height: 150px;
+  top: -70px;
+}
+.home__section__overlay__content__heading {
+  font-family: "Pasajero";
+  font-size: 45px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.home__section__overlay__content__info {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+.home__section__overlay__content__button {
+  position: absolute;
+  bottom: -70px;
+}
+.home__section__buttons__btn {
+  cursor: pointer;
+  --color: white;
+  font-family: inherit;
+  display: inline-block;
+  width: fit-content;
+  padding: 0.7em 2em;
+  margin: 0em 0.8em;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.5s;
+  z-index: 1;
+  font-size: 16px;
+  transform: skewX(-0.3rad);
+  font-weight: 500;
+  color: var(--color);
+  border: none;
+  text-decoration: none;
+  text-align: center;
+}
+.home__section__buttons__btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  height: 150px;
+  width: 150%;
+  border-radius: 50%;
+}
+
+.home__section__buttons__btn:before {
+  top: 100%;
+  left: 100%;
+  transition: all 0.7s;
+}
+
+.home__section__buttons__btn:hover:before {
+  top: -30px;
+  left: -30px;
+}
+
+.home__section__buttons__btn:active:before {
+  background: linear-gradient(90deg, #6825e6, #a655ba);
+  transition: background 0s;
+}
+.home__section__buttons__btn:disabled:before {
+  background: #242424;
+}
+.home__section__buttons__btn__primary {
+  background: linear-gradient(90deg, #3480a1, #2eaab4, #26e4cf);
+}
+.home__section__buttons__btn__primary:hover {
+  color: #2eaab4;
+}
+.home__section__buttons__btn__secondary::before {
+  background: white;
+}
+.home__section__buttons__btn__primary::before {
+  background: white;
+}
+.home__section__buttons__btn__secondary {
+  background: linear-gradient(90deg, #6825e6, #a655ba);
+}
+.home__section__buttons__btn__secondary:disabled {
+  background: #242424;
+}
+.home__section__buttons__btn__secondary:hover {
+  color: #6825e6;
+}
+
 .home__banner {
   width: 100%;
   margin: 0em auto;
@@ -981,6 +1177,10 @@ body {
   .home__nfts__card {
     width: 48%;
   }
+  .home__section__img {
+    width: 200%;
+    margin-left: -50%;
+  }
 }
 @media (max-width: 958px) {
   .home__banner__img {
@@ -1122,6 +1322,10 @@ body {
   }
   .popup__start__game__form__button {
     margin-top: 0em;
+  }
+  .home__section__img {
+    width: 300%;
+    margin-left: -150%;
   }
 }
 @media (max-width: 600px) {

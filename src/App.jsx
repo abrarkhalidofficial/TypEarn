@@ -97,6 +97,7 @@ function App() {
         user={user}
         setUser={setUser}
         dataWallet={data}
+        setdata={setdata}
       />
       <Routes>
         <Route

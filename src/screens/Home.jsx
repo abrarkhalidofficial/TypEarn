@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import car from "../assets/car.png";
+import homeBanner from "../assets/homeBanner.png";
+import logomin from "../assets/logomin.svg";
 import { StatsBoardFilterEntry } from "../components/StatsBoardFilterEntry";
 import { StatsBoardTableList } from "../components/StatsBoardTableList";
 import { Fade } from "react-reveal";
@@ -30,7 +31,43 @@ export default function Home({ setIsStartGame, user, dataFromApi }) {
 
   return (
     <>
-      <div className="home__banner">
+      <div className="home__section">
+        <img src={homeBanner} alt="homeBanner" className="home__section__img" />
+        <div className="home__section__overlay">
+          <div className="home__section__overlay__content">
+            <img
+              src={logomin}
+              alt="logomin"
+              className="home__section__overlay__content__icon"
+            />
+            <div className="home__section__overlay__content__heading">
+              WELCOME
+              <br />
+              TO The TYPEARN
+            </div>
+            <div className="home__section__overlay__content__info">
+              Cars, Garages, Gas Stations, Racetrack Land!
+              <br />
+              Now you can win crypto prizes and own part of the game you love to
+              play
+            </div>
+            <button
+              className="home__section__overlay__content__button home__section__buttons__btn home__section__buttons__btn__secondary"
+              onClick={() => {
+                setIsStartGame(true);
+              }}
+              disabled={
+                dataFromApi.hasOwnProperty("email") && dataFromApi?.email !== ""
+                  ? false
+                  : true
+              }
+            >
+              Start game
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* <div className="home__banner">
         <div className="home__banner__content">
           <div className="home__banner__content__left">
             <Fade bottom>
@@ -74,7 +111,7 @@ export default function Home({ setIsStartGame, user, dataFromApi }) {
             </Fade>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="home__stats__board__filter">
         <StatsBoardFilterEntry
           defaultChecked
