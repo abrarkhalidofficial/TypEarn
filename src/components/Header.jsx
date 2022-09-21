@@ -6,7 +6,15 @@ import { Menu, X } from "react-feather";
 import logo from "../assets/logo.svg";
 import { Fade } from "react-reveal";
 
-export function Header({ dataWallet, setUser, user, connectWallet, setdata }) {
+export function Header({
+  dataWallet,
+  setUser,
+  user,
+  dataFromApi,
+  connectWallet,
+  setdata,
+  setIsEditEmailLogin,
+}) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -23,7 +31,6 @@ export function Header({ dataWallet, setUser, user, connectWallet, setdata }) {
       }
     });
   }, []);
-
   return (
     <div
       className="header__wrapper"
@@ -114,9 +121,17 @@ export function Header({ dataWallet, setUser, user, connectWallet, setdata }) {
                         alignItems: "center",
                         fontSize: 14,
                       }}
+                      onClick={() => {
+                        setIsEditEmailLogin(true);
+                      }}
                     >
                       <img
-                        src={"data:image/png;base64," + user?.photo}
+                        src={
+                          dataFromApi?.dashboard?.photo === undefined
+                            ? "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"
+                            : "data:image/png;base64," +
+                              dataFromApi?.dashboard?.photo
+                        }
                         alt={user?.name}
                         style={{
                           width: 50,

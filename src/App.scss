@@ -120,7 +120,7 @@ body {
   left: 0;
   width: 100%;
   height: 200px;
-  background: linear-gradient(90deg, #b54893, #0db4ea);
+  background: linear-gradient(45deg, #ff00b3, #00eeff);
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
 }
@@ -296,6 +296,7 @@ body {
   height: fit-content;
   min-height: 600px;
   overflow: hidden;
+  background: linear-gradient(45deg, #ff00b3, #00eeff);
 }
 .home__banner__content {
   display: flex;
@@ -618,7 +619,7 @@ body {
   width: 100%;
   height: fit-content;
   background: url("./assets/footer.png");
-  background-size: contain;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -859,7 +860,7 @@ body {
   background: linear-gradient(90deg, #9214bf, #de49d9);
 }
 .reward__entry__reverse1 {
-  background: linear-gradient(90deg, #42ac4e, #59db69);
+  background: linear-gradient(90deg, $primary, #59db69);
 }
 .reward__entry__reverse2 {
   background: linear-gradient(90deg, #bf142b, #de4949);
@@ -1169,7 +1170,7 @@ body {
   height: 40px;
   padding: 0em 1em;
   border: none;
-  color: #42ac4e;
+  color: $primary;
   outline: 2px solid transparent;
   border-radius: 5px;
 }
@@ -1179,7 +1180,7 @@ body {
 .popup__reverse__form__content__input:hover,
 .popup__reverse__form__content__input:focus {
   transition: 300ms ease-in-out;
-  outline-color: #42ac4e;
+  outline-color: $primary;
 }
 .popup__reverse__form__content__upload {
   position: relative;
@@ -1221,7 +1222,7 @@ body {
 .popup__reverse__form__content__button {
   margin-top: 2em;
   height: 40px;
-  background: linear-gradient(#42ac4e, $primary);
+  background: linear-gradient($primary, $primary);
   color: $white;
   border-radius: 5px;
   border: none;
@@ -1232,7 +1233,7 @@ body {
   cursor: pointer;
 }
 .popup__reverse__form__content__button:hover {
-  background: linear-gradient($primary, #42ac4e);
+  background: linear-gradient($primary, $primary);
 }
 
 .scorecard__reverse__form__img {
@@ -1313,7 +1314,7 @@ body {
 }
 .scorecard__reverse__score__card__data:hover {
   background-color: #f3f3f3;
-  color: #42ac4e;
+  color: $primary;
 }
 
 .scorecard__reverse__form__content__go__to__home {
@@ -1329,8 +1330,8 @@ body {
 }
 .scorecard__reverse__form__content__go__to__home:hover {
   color: #ffff;
-  border: 1px solid #42ac4e;
-  background: #42ac4e;
+  border: 1px solid $primary;
+  background: $primary;
 }
 @media (max-width: 1440px) {
   .reward__entry {

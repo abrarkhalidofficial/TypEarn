@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import banner from "../assets/banner.png";
-import icon from "../assets/icon.svg";
+import icon from "../assets/logomin.svg";
 import lightRed from "../assets/lightRed.png";
 import lightYellow from "../assets/lightYellow.png";
 import lightGreen from "../assets/lightGreen.png";
@@ -32,8 +32,6 @@ export default function Game({
   const [prev, setPrev] = React.useState(0);
   const [something, setSomething] = React.useState(false);
 
-  // console.log(dataFromApi);
-
   useEffect(() => {
     setWinners(dataFromApi?.gameData?.positions);
   }, [dataFromApi?.gameData?.positions]);
@@ -50,7 +48,6 @@ export default function Game({
 
   useEffect(() => {
     if (dataFromApi?.currentWord !== prev) {
-      console.log("prev", prev);
       setPrev(dataFromApi?.currentWord);
       setSomething(false);
     }
@@ -66,8 +63,6 @@ export default function Game({
     let list = dataFromApi?.gameData?.sentence?.split(" ");
     let value = event.target.value;
 
-    console.log("66", list[dataFromApi?.currentWord + test]);
-    console.log("test", test);
     setPrev(dataFromApi?.currentWord);
     setTypedString(value);
     setTextColor(false);
@@ -119,7 +114,6 @@ export default function Game({
           maxWidth: 1440 - 64,
           marginTop: "6em",
           position: "relative",
-          backgroundColor: "#6cc065",
           borderRadius: 20,
         }}
       >

@@ -19,6 +19,7 @@ function App() {
   const [isStartGame, setIsStartGame] = useState(false);
   const [isScoreCard, setIsScoreCard] = useState(false);
   const [isEmailLogin, setIsEmailLogin] = useState(false);
+  const [isEditEmailLogin, setIsEditEmailLogin] = useState(false);
   const [dataFromApi, setDataFromApi] = useState([]);
   const [winners, setWinners] = useState([]);
   const [data, setdata] = useState({
@@ -27,8 +28,7 @@ function App() {
   });
 
   socket.addEventListener("message", function (event) {
-    const js = JSON.parse(event.data);
-    setDataFromApi(js);
+    setDataFromApi(JSON.parse(event.data));
   });
 
   const btnhandler = () => {
@@ -89,6 +89,14 @@ function App() {
       {isEmailLogin ? (
         <EmailLogin onClose={setIsEmailLogin} data={data} />
       ) : null}
+      {isEditEmailLogin ? (
+        <EmailLogin
+          onClose={setIsEditEmailLogin}
+          isEdit
+          data={data}
+          dataFromApi={dataFromApi}
+        />
+      ) : null}
       {isStartGame ? (
         <StartGame setIsStartGame={setIsStartGame} email={user?.email} />
       ) : null}
@@ -96,8 +104,10 @@ function App() {
         connectWallet={btnhandler}
         user={user}
         setUser={setUser}
+        dataFromApi={dataFromApi}
         dataWallet={data}
         setdata={setdata}
+        setIsEditEmailLogin={setIsEditEmailLogin}
       />
       <Routes>
         <Route

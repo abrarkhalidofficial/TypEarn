@@ -37,7 +37,6 @@ export function StatsBoardTableList({ data, index }) {
       return "now";
     } else return time;
   }
-
   return (
     <Fade bottom>
       <a className="home__stats__board__table__list">
