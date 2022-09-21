@@ -10,7 +10,7 @@ export function StatsBoardFilterEntry({
 }) {
   return (
     <Fade bottom duration={delay}>
-      <div className="home__stats__board__filter__entry">
+      <div className="home__stats__board__filter__entry ">
         <input
           type="radio"
           defaultChecked={defaultChecked}
@@ -20,7 +20,7 @@ export function StatsBoardFilterEntry({
         />
         <div className="home__stats__board__filter__entry__content">
           {svg}
-          {label}
+          <span> {label}</span>
         </div>
       </div>
     </Fade>
