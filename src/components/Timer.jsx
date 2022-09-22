@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 
 export default function Timer({ value, setIsTimerOpen, noJoin }) {
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     if (value <= 0) {
       setIsTimerOpen(false);
     }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [value]);
 
   return (

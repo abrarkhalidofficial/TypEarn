@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../utils/socket";
 import { StartGameFormEntry } from "./StartGameFormEntry";
 
 export default function StartGame({ setIsStartGame, email }) {
   const navigate = useNavigate();
-  socket.send("7" + " " + email);
+  useEffect(() => {
+    console.log("7" + " " + email);
+    socket.send("7" + " " + email);
+  }, []);
 
   function join_random() {
     grecaptcha.ready(() => {
@@ -45,8 +48,8 @@ export default function StartGame({ setIsStartGame, email }) {
                     y2="1"
                     gradientUnits="objectBoundingBox"
                   >
-                    <stop offset="0" stopColor="#59db69" />
-                    <stop offset="1" stopColor="#59db69" />
+                    <stop offset="0" stopColor="#a655ba" />
+                    <stop offset="1" stopColor="#a655ba" />
                   </linearGradient>
                 </defs>
                 <path
