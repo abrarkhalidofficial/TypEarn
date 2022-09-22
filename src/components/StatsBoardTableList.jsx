@@ -1,5 +1,4 @@
 import React from "react";
-import user from "../assets/user.png";
 import { Fade } from "react-reveal";
 
 export function StatsBoardTableList({ data, index }) {

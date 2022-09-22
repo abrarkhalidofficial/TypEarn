@@ -2,7 +2,7 @@ import React from "react";
 
 export function About({ partnerslogo, aboutImg }) {
   return (
-    <div className="about">
+    <section id="about" className="about">
       <div className="about__left">
         <img
           src={partnerslogo}
@@ -19,6 +19,6 @@ export function About({ partnerslogo, aboutImg }) {
         </button>
       </div>
       <img src={aboutImg} alt="aboutImg" className="about__right" />
-    </div>
+    </section>
   );
 }

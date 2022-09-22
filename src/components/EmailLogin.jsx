@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { X } from "react-feather";
-import { useEffect } from "react";
 import imageToBase64 from "image-to-base64/browser";
 import { socket } from "../utils/socket";
 
-export default function EmailLogin({ onClose, data, isEdit, dataFromApi }) {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [image, setImage] = React.useState("");
+export default function EmailLogin({
+  onClose,
+  data,
+  isEdit,
+  dataFromApi,
+  avatar,
+}) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -31,6 +36,7 @@ export default function EmailLogin({ onClose, data, isEdit, dataFromApi }) {
           onClose(false);
           if (isEdit) {
             socket.send("10" + "\n" + data?.address + "\n" + image);
+            socket.send("11" + " " + data?.address);
           } else {
             socket.send(
               "9" +
@@ -88,7 +94,7 @@ export default function EmailLogin({ onClose, data, isEdit, dataFromApi }) {
             className="popup__reverse__form__content__input"
           />
           <FileUpload
-            dataFromApi={dataFromApi}
+            avatar={avatar}
             onChange={(e) => {
               setImage(e);
             }}
@@ -105,8 +111,8 @@ export default function EmailLogin({ onClose, data, isEdit, dataFromApi }) {
   );
 }
 
-function FileUpload({ onChange, dataFromApi }) {
-  const [uploadedFile, setUploadedFile] = React.useState("");
+function FileUpload({ onChange, avatar }) {
+  const [uploadedFile, setUploadedFile] = useState("");
 
   return (
     <div
@@ -134,13 +140,13 @@ function FileUpload({ onChange, dataFromApi }) {
         className="popup__reverse__form__content__upload__input"
       />
 
-      {dataFromApi?.dashboard?.photo !== "" && uploadedFile === "" ? (
+      {avatar !== null && uploadedFile === "" ? (
         <div
           className="popup__reverse__form__content__upload__content__filled"
           style={{ margin: "0em auto" }}
         >
           <img
-            src={"data:image/png;base64," + dataFromApi?.dashboard?.photo}
+            src={avatar}
             alt="uploaded file"
             className="popup__reverse__form__content__upload__content__filled__img"
           />

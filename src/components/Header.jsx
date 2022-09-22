@@ -10,6 +10,7 @@ export function Header({
   dataWallet,
   setUser,
   user,
+  avatar,
   dataFromApi,
   connectWallet,
   setdata,
@@ -127,10 +128,9 @@ export function Header({
                     >
                       <img
                         src={
-                          dataFromApi?.dashboard?.photo === undefined
+                          avatar === null
                             ? "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"
-                            : "data:image/png;base64," +
-                              dataFromApi?.dashboard?.photo
+                            : avatar
                         }
                         alt={user?.name}
                         style={{

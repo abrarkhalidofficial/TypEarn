@@ -1,10 +1,10 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import banner from "../assets/banner.png";
-import icon from "../assets/logomin.svg";
-import lightRed from "../assets/lightRed.png";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { GamePlayerEntry } from "../components/GamePlayerEntry";
 import lightYellow from "../assets/lightYellow.png";
 import lightGreen from "../assets/lightGreen.png";
-import { GamePlayerEntry } from "./GamePlayerEntry";
+import lightRed from "../assets/lightRed.png";
+import banner from "../assets/banner.png";
+import icon from "../assets/logomin.svg";
 import { socket } from "../utils/socket";
 import Timer from "../components/Timer";
 
@@ -19,12 +19,13 @@ export default function Game({
       setIsTimerOpen(true);
     }
   }, [dataFromApi]);
-  const [textColor, setTextColor] = React.useState(false);
-  const [isTimerOpen, setIsTimerOpen] = React.useState(true);
-  const [typedString, setTypedString] = React.useState("");
-  const [gameStarted, setGameStarted] = React.useState(false);
-  const [disable, setDisable] = React.useState(false);
-  const [prev, setPrev] = React.useState(0);
+  const [textColor, setTextColor] = useState(false);
+  const [isTimerOpen, setIsTimerOpen] = useState(true);
+  const [typedString, setTypedString] = useState("");
+  const [gameStarted, setGameStarted] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const [prev, setPrev] = useState(0);
+  const [something, setSomething] = useState(false);
 
   useEffect(() => {
     setWinners(dataFromApi?.gameData?.positions);
@@ -40,17 +41,18 @@ export default function Game({
     }
   }, [dataFromApi?.gameData?.light]);
 
-  let test = 0;
-
   useEffect(() => {
     if (dataFromApi?.currentWord !== prev) {
       setPrev(dataFromApi?.currentWord);
-      test--;
+      setSomething(false);
     }
   }, [dataFromApi]);
 
   function showCurrentValue(event) {
-    let test2 = test;
+    let test = 0;
+    if (something) {
+      test = 1;
+    }
 
     let next = false;
     let list = dataFromApi?.gameData?.sentence?.split(" ");
@@ -59,19 +61,19 @@ export default function Game({
     setPrev(dataFromApi?.currentWord);
     setTypedString(value);
     setTextColor(false);
-    if (dataFromApi?.currentWord + test2 < list.length) {
-      if (dataFromApi?.currentWord + test2 + 1 < list.length) {
-        if (list[dataFromApi?.currentWord + test2] + " " == value) {
+    if (dataFromApi?.currentWord + test < list.length) {
+      if (dataFromApi?.currentWord + test + 1 < list.length) {
+        if (list[dataFromApi?.currentWord + test] + " " == value) {
           socket.send("6" + " " + user?.email);
           next = true;
-          test++;
+          setSomething(true);
           setTypedString("");
         }
       } else {
-        if (list[dataFromApi?.currentWord + test2] == value) {
+        if (list[dataFromApi?.currentWord + test] == value) {
           socket.send("6" + " " + user?.email);
           next = true;
-          test++;
+          setSomething(true);
           setTypedString("");
           setDisable(true);
           setIsScoreCard(true);
@@ -79,10 +81,10 @@ export default function Game({
       }
     }
     if (!next) {
-      if (value.length > list[dataFromApi?.currentWord + test2].length) {
+      if (value.length > list[dataFromApi?.currentWord + test].length) {
         setTextColor(true);
       } else if (
-        list[dataFromApi?.currentWord + test2].slice(0, value.length) !== value
+        list[dataFromApi?.currentWord + test].slice(0, value.length) !== value
       ) {
         setTextColor(true);
       } else {
@@ -107,7 +109,7 @@ export default function Game({
           maxWidth: 1440 - 64,
           marginTop: "6em",
           position: "relative",
-          borderRadius: 20,
+          transform: "skewX(-0.2rad)",
         }}
       >
         <img
@@ -152,12 +154,12 @@ export default function Game({
             </div>
             <div className="game__container__main">
               {dataFromApi?.gameData?.players
-                ?.filter((player, i) => i === dataFromApi?.myIndex)
+                ?.filter((_player, i) => i === dataFromApi?.myIndex)
                 .map((palyer, i) => (
                   <GamePlayerEntry key={i} data={palyer} />
                 ))}
               {dataFromApi?.gameData?.players
-                ?.filter((player, i) => i !== dataFromApi?.myIndex)
+                ?.filter((_player, i) => i !== dataFromApi?.myIndex)
                 .map((palyer, i) => (
                   <GamePlayerEntry key={i} data={palyer} />
                 ))}

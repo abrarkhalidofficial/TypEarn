@@ -13,7 +13,6 @@ export function HomeCommunity() {
               Join Community
             </div>
             <div
-              className=""
               style={{
                 display: "flex",
                 marginTop: "1em",

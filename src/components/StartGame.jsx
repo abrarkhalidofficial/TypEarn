@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../utils/socket";
 import { StartGameFormEntry } from "./StartGameFormEntry";
@@ -6,7 +6,6 @@ import { StartGameFormEntry } from "./StartGameFormEntry";
 export default function StartGame({ setIsStartGame, email }) {
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("7" + " " + email);
     socket.send("7" + " " + email);
   }, []);
 

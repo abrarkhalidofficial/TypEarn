@@ -22,9 +22,13 @@ export function TableRow({ item, unStake }) {
   } else {
     seconds = Math.floor(claim_allowed_time);
   }
-  function getMonthFunc(value) {
-    return new Date(getValueOfDate(value) * 1000).getMonth() + 1;
-  }
+
+  const getMonthFunc = useCallback(
+    function (value) {
+      return new Date(getValueOfDate(value) * 1000).getMonth() + 1;
+    },
+    [value]
+  );
   return (
     <Fade bottom>
       <a className="home__stats__board__table__list">

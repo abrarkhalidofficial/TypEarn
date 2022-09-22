@@ -26,9 +26,15 @@ function App() {
     address: "",
     Balance: null,
   });
+  const [avatar, setAvatar] = useState(null);
 
   socket.addEventListener("message", function (event) {
-    setDataFromApi(JSON.parse(event.data));
+    const js = JSON.parse(event.data);
+    if (js.hasOwnProperty("user_image")) {
+      setAvatar("data:image/png;base64," + js?.user_image);
+    } else {
+      setDataFromApi(js);
+    }
   });
 
   const btnhandler = () => {
@@ -55,7 +61,8 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       if (dataFromApi?.auth?.exists === "yes") {
-        socket.send("1" + " " + user?.email);
+        socket.send("1" + " " + dataFromApi?.auth?.data?.email);
+        socket.send("11" + " " + data?.address);
       } else if (
         dataFromApi?.auth?.exists === "no" &&
         dataFromApi?.auth?.address !== ""
@@ -87,7 +94,7 @@ function App() {
         />
       ) : null}
       {isEmailLogin ? (
-        <EmailLogin onClose={setIsEmailLogin} data={data} />
+        <EmailLogin onClose={setIsEmailLogin} data={data} avatar={avatar} />
       ) : null}
       {isEditEmailLogin ? (
         <EmailLogin
@@ -95,6 +102,7 @@ function App() {
           isEdit
           data={data}
           dataFromApi={dataFromApi}
+          avatar={avatar}
         />
       ) : null}
       {isStartGame ? (
@@ -107,6 +115,7 @@ function App() {
         dataFromApi={dataFromApi}
         dataWallet={data}
         setdata={setdata}
+        avatar={avatar}
         setIsEditEmailLogin={setIsEditEmailLogin}
       />
       <Routes>

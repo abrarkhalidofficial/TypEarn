@@ -4,11 +4,10 @@ import aboutImg from "../assets/aboutImg.png";
 import partnerslogo from "../assets/partnerslogo.png";
 import { HomeCommunity } from "./HomeCommunity";
 import { HomeSection } from "./HomeSection";
-import { ScoreBoard } from "./ScoreBoard";
+import { ScoreBoard } from "../components/ScoreBoard";
 import { Partners } from "./Partners";
 import { Teams } from "./Teams";
 import { About } from "./About";
-import "swiper/css";
 
 export default function Home({ setIsStartGame, user, dataFromApi }) {
   return (
@@ -16,7 +15,9 @@ export default function Home({ setIsStartGame, user, dataFromApi }) {
       <HomeSection setIsStartGame={setIsStartGame} dataFromApi={dataFromApi} />
       {user === null ? null : <ScoreBoard user={user} />}
       <About partnerslogo={partnerslogo} aboutImg={aboutImg} />
-      <img src={roadmap} alt="roadmap" style={{ width: "100%" }} />
+      <section id="roadmap">
+        <img src={roadmap} alt="roadmap" style={{ width: "100%" }} />
+      </section>
       <Partners />
       <Teams />
       <HomeCommunity />

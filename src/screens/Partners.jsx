@@ -4,7 +4,7 @@ import partnerslogo from "../assets/partnerslogo.png";
 
 export function Partners() {
   return (
-    <div className="partners">
+    <section id="partners" className="partners">
       <div className="partners__heading">PARTNERS</div>
       <div className="partners__content">
         <img
@@ -18,6 +18,6 @@ export function Partners() {
           className="partners__content__right"
         />
       </div>
-    </div>
+    </section>
   );
 }

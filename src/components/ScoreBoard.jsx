@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StatsBoardFilterEntry } from "../components/StatsBoardFilterEntry";
 import { StatsBoardTableList } from "../components/StatsBoardTableList";
 import { Fade } from "react-reveal";
 
 export function ScoreBoard({ user }) {
-  const [limit, setLimit] = React.useState(10);
-  const [stats, setStats] = React.useState([]);
+  const [limit, setLimit] = useState(10);
+  const [stats, setStats] = useState([]);
 
   function getScores() {
     axios.get("http://54.242.116.71:8000/scores").then((res) => {

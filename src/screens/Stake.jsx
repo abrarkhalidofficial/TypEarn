@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StatsBoardFilterEntry } from "./StatsBoardFilterEntry";
+import { StakeBoardFilterEntry } from "../components/StakeBoardFilterEntry";
 import local from "../assets/local.json";
-import { NFTCard } from "./NFTCard";
+import { NFTCard } from "../components/NFTCard";
 import { ethers } from "ethers";
 
 import bronze from "../assets/bronz.png";
@@ -130,7 +130,7 @@ export default function Stake() {
       </div>
       <div className="home__stats__board__filter home__stats__board__filter__special">
         {tabs.map((item, index) => (
-          <StatsBoardFilterEntry
+          <StakeBoardFilterEntry
             item={item}
             key={index}
             setSelectedCategory={setSelectedCategory}

@@ -4,7 +4,7 @@ import logomin from "../assets/logomin.svg";
 
 export function HomeSection({ setIsStartGame, dataFromApi }) {
   return (
-    <div className="home__section">
+    <section id="home" className="home__section">
       <img src={homeBanner} alt="homeBanner" className="home__section__img" />
       <div className="home__section__overlay">
         <div className="home__section__overlay__content">
@@ -39,6 +39,6 @@ export function HomeSection({ setIsStartGame, dataFromApi }) {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
 import { Fade } from "react-reveal";
 import stake from "../assets/stake.png";
 import local from "../assets/local.json";
-import { ethers } from "ethers";
-import { TableRow } from "./TableRow";
+import { TableRow } from "../components/TableRow";
 
 export default function Staked() {
   const [tableData, setTableData] = useState([]);
@@ -42,8 +42,6 @@ export default function Staked() {
     );
 
     let query = await usdcContract.userData(userAddress);
-
-    console.log("tabledata", query[1]);
     setTableData(query[1]);
   }
 

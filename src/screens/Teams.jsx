@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import team from "../assets/team.png";
 import { Linkedin } from "react-feather";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export function Teams() {
-  const [slidesPerView, setSlidesPerView] = React.useState(4);
-  useEffect(() => {
+  const [slidesPerView, setSlidesPerView] = useState(4);
+  function changeSlidesPerView() {
     if (window.innerWidth < 650) {
       setSlidesPerView(1);
     } else if (window.innerWidth < 950) {
@@ -15,22 +15,14 @@ export function Teams() {
     } else {
       setSlidesPerView(4);
     }
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < 650) {
-        setSlidesPerView(1);
-      } else if (window.innerWidth < 950) {
-        setSlidesPerView(2);
-      } else if (window.innerWidth < 1200) {
-        setSlidesPerView(3);
-      } else {
-        setSlidesPerView(4);
-      }
-    });
+  }
+  useEffect(() => {
+    changeSlidesPerView();
+    window.addEventListener("resize", changeSlidesPerView);
   }, []);
 
   return (
-    <div className="teams">
+    <section id="teams" className="teams">
       <div className="teams__heading">Teams</div>
       <div className="teams__content">
         <Swiper spaceBetween={50} slidesPerView={slidesPerView}>
@@ -116,6 +108,6 @@ export function Teams() {
           </SwiperSlide>
         </Swiper>
       </div>
-    </div>
+    </section>
   );
 }
