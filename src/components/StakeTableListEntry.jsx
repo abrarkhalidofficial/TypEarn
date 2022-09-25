@@ -10,7 +10,7 @@ export function StakeTableListEntry({}) {
       }}
     >
       <div className="home__stats__board__table__list__entry">
-        <span></span> 1
+        <span /> 1
       </div>
       <div className="home__stats__board__table__list__entry">
         <span>Staking Date</span>

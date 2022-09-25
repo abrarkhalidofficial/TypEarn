@@ -2,12 +2,12 @@ import React from "react";
 import roadmap from "../assets/roadmap.png";
 import aboutImg from "../assets/aboutImg.png";
 import partnerslogo from "../assets/partnerslogo.png";
-import { HomeCommunity } from "./HomeCommunity";
-import { HomeSection } from "./HomeSection";
+import { HomeCommunity } from "../components/HomeCommunity";
+import { HomeSection } from "../components/HomeSection";
 import { ScoreBoard } from "../components/ScoreBoard";
-import { Partners } from "./Partners";
-import { Teams } from "./Teams";
-import { About } from "./About";
+import { Partners } from "../components/Partners";
+import { Teams } from "../components/Teams";
+import { About } from "../components/About";
 
 export default function Home({ setIsStartGame, user, dataFromApi }) {
   return (

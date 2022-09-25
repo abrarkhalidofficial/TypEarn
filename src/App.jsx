@@ -9,10 +9,10 @@ import Game from "./screens/Game";
 import Home from "./screens/Home";
 import Stake from "./screens/Stake";
 import Staked from "./screens/Staked";
-import Rewards from "./screens/Rewards";
 import EmailLogin from "./components/EmailLogin";
 import ScoreCard from "./components/ScoreCard";
-import "./App.scss";
+import { withStyles } from "react-critical-css";
+import style from "./App.scss";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -138,10 +138,6 @@ function App() {
           element={<Staked setIsStartGame={setIsStartGame} user={user} />}
         />
         <Route
-          path="/rewards"
-          element={<Rewards setIsStartGame={setIsStartGame} user={user} />}
-        />
-        <Route
           path="/game"
           element={
             <Game
@@ -161,4 +157,4 @@ function App() {
   );
 }
 
-export default App;
+export default withStyles(style)(App);

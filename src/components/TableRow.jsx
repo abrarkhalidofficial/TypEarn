@@ -13,15 +13,13 @@ export function TableRow({ item, unStake }) {
   let hours = 0;
   let minutes = 0;
   let seconds = 0;
-  if (claim_allowed_time >= 3600 * 24) {
-    days = Math.floor(claim_allowed_time / (3600 * 24));
-  } else if (claim_allowed_time >= 3600) {
-    hours = Math.floor(claim_allowed_time / 3600);
-  } else if (claim_allowed_time >= 60) {
-    minutes = Math.floor(claim_allowed_time / 60);
-  } else {
-    seconds = Math.floor(claim_allowed_time);
-  }
+  claim_allowed_time >= 3600 * 24
+    ? (days = Math.floor(claim_allowed_time / (3600 * 24)))
+    : claim_allowed_time >= 3600
+    ? (hours = Math.floor(claim_allowed_time / 3600))
+    : claim_allowed_time >= 60
+    ? (minutes = Math.floor(claim_allowed_time / 60))
+    : (seconds = Math.floor(claim_allowed_time));
 
   const getMonthFunc = useCallback(
     function (value) {

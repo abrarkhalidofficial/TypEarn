@@ -42,7 +42,7 @@ const CheckBox = ({
               stroke-linejoin="round"
               className="feather feather-check"
             >
-              <polyline points="20 6 9 17 4 12"></polyline>
+              <polyline points="20 6 9 17 4 12" />
             </svg>
           ) : null}
         </div>

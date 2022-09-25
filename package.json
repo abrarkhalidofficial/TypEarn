@@ -14,6 +14,7 @@
     "ethers": "^5.7.1",
     "image-to-base64": "^2.2.0",
     "react": "^18.2.0",
+    "react-critical-css": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-outside-click-handler": "^1.3.0",

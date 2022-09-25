@@ -40,7 +40,7 @@ export function StatsBoardTableList({ data, index }) {
     <Fade bottom>
       <a className="home__stats__board__table__list">
         <div className="home__stats__board__table__list__entry">
-          <span></span> {index + 1}
+          <span /> {index + 1}
         </div>
         <div className="home__stats__board__table__list__entry">
           <span>Name</span>

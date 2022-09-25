@@ -12,7 +12,7 @@ export function About({ partnerslogo, aboutImg }) {
         <div className="about__left__heading">ABOUT TYPEARN</div>
         <div className="about__left__info">
           World's first Type-to-Earn self-sustainable economy supercharged using
-          blockchain.{" "}
+          blockchain.
         </div>
         <button className="home__section__buttons__btn home__section__buttons__btn__secondary">
           Start game

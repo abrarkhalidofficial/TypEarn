@@ -18,19 +18,18 @@ export function Header({
 }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
+
+  function changeIsOpen() {
     if (window.innerWidth < 1000) {
       setIsOpen(false);
     } else {
       setIsOpen(true);
     }
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < 1000) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
-      }
-    });
+  }
+
+  useEffect(() => {
+    changeIsOpen();
+    window.addEventListener("resize", changeIsOpen);
   }, []);
   return (
     <div
@@ -142,7 +141,6 @@ export function Header({
                     </div>
                   </>
                 )}
-
                 <a
                   onClick={
                     dataWallet.Balance === null
@@ -163,7 +161,7 @@ export function Header({
                       ? "Connect Wallet"
                       : "Wallet Connected"}
                   </span>
-                  <div className="liquid"></div>
+                  <div className="liquid" />
                 </a>
               </div>
             </OutsideClickHandler>
