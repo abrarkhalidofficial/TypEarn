@@ -1,4 +1,5 @@
-export let socket = new WebSocket("ws://54.242.116.71:8766");
+export let socket = new WebSocket("wss://typearncontrol.com:8766");
+
 socket.onclose = () => {
-  socket = new WebSocket("ws://54.242.116.71:8766");
+  socket = new WebSocket("wss://typearncontrol.com:8766");
 };

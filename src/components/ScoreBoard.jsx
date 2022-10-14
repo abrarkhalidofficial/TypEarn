@@ -9,22 +9,22 @@ export function ScoreBoard({ user }) {
   const [stats, setStats] = useState([]);
 
   function getScores() {
-    axios.get("http://54.242.116.71:8000/scores").then((res) => {
+    axios.get("https://typearncontrol.com:8000/scores").then((res) => {
       setStats(res.data.data);
     });
   }
   function getLatest() {
-    axios.get("http://54.242.116.71:8000/latest").then((res) => {
+    axios.get("https://typearncontrol.com:8000/latest").then((res) => {
       setStats(res.data.data);
     });
   }
   function getMyScore() {
-    axios.get("http://54.242.116.71:8000/scores").then((res) => {
+    axios.get("https://typearncontrol.com:8000/scores").then((res) => {
       setStats(res.data.data.filter((item) => item.email === user?.email));
     });
   }
   useEffect(() => {
-    getLatest();
+    // getLatest();
   }, []);
 
   return (
@@ -33,7 +33,7 @@ export function ScoreBoard({ user }) {
         <StatsBoardFilterEntry
           defaultChecked
           delay={1000}
-          onClick={getLatest}
+          // onClick={getLatest}
           svg={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export function ScoreBoard({ user }) {
           label="Latest High Scores"
         />
         <StatsBoardFilterEntry
-          onClick={getMyScore}
+          // onClick={getMyScore}
           delay={1200}
           svg={
             <svg
@@ -72,7 +72,7 @@ export function ScoreBoard({ user }) {
           label="My Score"
         />
         <StatsBoardFilterEntry
-          onClick={getScores}
+          // onClick={getScores}
           delay={1400}
           svg={
             <svg
@@ -93,7 +93,7 @@ export function ScoreBoard({ user }) {
           label="Hall of Fame"
         />
         <StatsBoardFilterEntry
-          onClick={getScores}
+          // onClick={getScores}
           delay={1600}
           svg={
             <svg
