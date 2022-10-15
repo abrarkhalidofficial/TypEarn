@@ -13,7 +13,7 @@ export default function Home({ setIsStartGame, user, dataFromApi }) {
   return (
     <>
       <HomeSection setIsStartGame={setIsStartGame} dataFromApi={dataFromApi} />
-      {user === null ? null : <ScoreBoard user={user} />}
+      {/* {user === null ? null : <ScoreBoard user={user} />} */}
       <About partnerslogo={partnerslogo} aboutImg={aboutImg} />
       <section id="roadmap">
         <img src={roadmap} alt="roadmap" style={{ width: "100%" }} />
